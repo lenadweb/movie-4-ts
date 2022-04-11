@@ -1,0 +1,124 @@
+.wrapper {
+    /*height: 100vh;*/
+    /*background-image: url("./img/back.jpg");*/
+    width: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrapper input::placeholder {
+    color: #9daad6;
+}
+
+.wrapper button {
+    background: #1e1d1d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    display: block;
+}
+
+.inputWrapper {
+    position: relative;
+    z-index: 4000;
+}
+
+.inputWrapper input {
+    outline: none;
+    /*border: 1px solid #ffffff;*/
+    border: none;
+    padding: 0.6rem 0.8rem 0.6rem 35px;
+    width: 100%;
+    height: 40px;
+    border-radius: var(--secondary-border-radius);
+    background-color: var(--blue-background);
+    box-sizing: border-box;
+    background-image: url("../../../assets/images/search-icon.png");
+    background-position: 10px center;
+    background-size: 15px;
+    background-repeat: no-repeat;
+    color: #9daad6;
+    transition-property: color, border;
+    transition-duration: .2s;
+    transition-timing-function: ease-in;
+}
+
+.inputWrapper input::placeholder {
+    transition: all 0.2s ease-in;
+}
+
+.resultHolder {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 12px;
+    padding: 12px;
+    background: #3c506799;
+    border-radius: var(--secondary-border-radius);
+    position: absolute;
+    z-index: 100000;
+    transition: all 0.2s ease-in;
+}
+
+.resultHolder > a {
+    margin-bottom: 8px;
+}
+
+.resultSearchEmptyResults {
+    color: #ffffff;
+    text-align: center;
+    font-weight: 400;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.loading {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+}
+
+.inputWrapper input:focus {
+    border-color: #f814bc;
+}
+
+.inputWrapper input:focus::placeholder {
+    color: #d7d7d7;
+}
+
+.inputWrapper input:focus {
+    color: #858585;
+}
+
+.blur {
+    position: absolute;
+    left: -300px;
+    top: -100px;
+    width: 150vw;
+    height: 150vh;
+    z-index: 3000;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        width: 100%;
+    }
+
+    .inputWrapper input {
+        padding: 0.4rem 0.8rem 0.4rem 35px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 700px) {
+    .resultHolder {
+        left: 0;
+        grid-template-columns: 1fr;
+        max-height: calc(100vh - 80px);
+        overflow: auto;
+    }
+}
+
+
+

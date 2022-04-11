@@ -1,0 +1,37 @@
+.wrapper {
+    position: relative;
+    color: #000000;
+}
+
+.textInput {
+    background-color: white;
+    border-color: #ececec;
+    border-radius: var(--input-border-radius);
+    border-style: solid;
+    border-width: 1px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.1s ease-in;
+    outline: none;
+    padding: 8px 12px;
+    min-height: 34px;
+}
+
+.textInput:focus {
+    border-color: #3284e4;
+    background-color: #f8fafd;
+}
+
+/*.textInput[type="password"] {*/
+/*    font: small-caption;*/
+/*}*/
+
+.passwordBtnContainer {
+    position: absolute;
+    right: 12px;
+    top: 7px;
+}
+
+.visiblePassBtn {
+    filter: invert(41%) sepia(42%) saturate(2123%) hue-rotate(192deg) brightness(97%) contrast(83%);
+}

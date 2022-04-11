@@ -1,0 +1,16 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="512"
+        height="512"
+        enableBackground="new 0 0 512 512"
+        viewBox="0 0 6.35 6.35"
+>
+    <g xmlns="http://www.w3.org/2000/svg" transform="translate(0 -290.65)">
+        <path
+                fill="#fff"
+                d="M4.09 292.234a.265.265 0 00-.162.067l-1.854 1.588a.265.265 0 000 .402l1.854 1.586a.265.265 0 10.344-.4l-1.62-1.387 1.62-1.387a.265.265 0 00-.182-.469z"
+                data-original="#000000"
+                vectorEffect="none"
+        ></path>
+    </g>
+</svg>

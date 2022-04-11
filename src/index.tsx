@@ -5,6 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { store } from 'redux/store/store';
 import reportWebVitals from './reportWebVitals';
 import AppRouter from './AppRouter';
+import 'assets/styles/reset.css';
+import 'assets/styles/index.css';
+import 'assets/styles/variables.css';
 
 const root = ReactDOM.createRoot((document.getElementById('root') as Element));
 const element = (

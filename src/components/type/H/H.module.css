@@ -1,0 +1,24 @@
+.item {
+    font-weight: 300;
+    line-height: 2.5;
+}
+
+.small {
+    font-size: 12px;
+}
+
+.medium {
+    font-size: 14px;
+}
+
+.large {
+    font-size: 20px;
+}
+
+.xlarge {
+    font-size: 32px;
+}
+
+.bold {
+    font-weight: bold;
+}

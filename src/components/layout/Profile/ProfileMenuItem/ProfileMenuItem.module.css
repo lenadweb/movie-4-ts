@@ -1,0 +1,25 @@
+.wrapper {
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: initial;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.wrapper:last-child {
+    margin-bottom: 0;
+}
+
+
+.wrapper:hover {
+    background-color: var(--blue-background-hover);
+}
+
+.icon {
+    margin-left: 16px;
+}

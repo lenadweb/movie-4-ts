@@ -1,0 +1,220 @@
+.item {
+    color: var(--font-color-main);
+    display: block;
+    margin: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upperCircle, .bottomCircle, .rect {
+    display: none;
+}
+
+.itemActive {
+    color: var(--font-color-secondary);
+    position: relative;
+    z-index: 30;
+}
+
+/*.itemActive .bottomCircle {*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*    bottom: -20px;*/
+/*    right: -20px;*/
+/*    width: 20px;*/
+/*    transition: all 0.2s ease-in;*/
+/*    z-index: 2;*/
+/*    height: 20px;*/
+/*    border-top-right-radius: 20px;*/
+/*    border-color: var(--background-color-option) var(--background-color-option) transparent transparent;*/
+/*    border-width: 1px;*/
+/*    border-style: solid;*/
+/*    background: var(--background-color-main);*/
+/*}*/
+
+.navlinkContent {
+    position: relative;
+    z-index: 10;
+    background-position: right center;
+    background-repeat: no-repeat;
+    width: 160px;
+    background-size: 25px;
+    display: flex;
+    justify-content: center;
+    left: -5px;
+    align-items: center;
+    height: 36px;
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+}
+
+.navlinkContent svg {
+    width: 20px;
+    top: 8px;
+    height: auto;
+    position: absolute;
+    right: 0;
+    transition: all 0.2s ease-in;
+}
+
+.navlinkContent svg * {
+    fill: #ffffff;
+    transition: all 0.1s ease-in;
+}
+
+.itemActive .navlinkContent svg * {
+    fill: var(--background-color-option);
+}
+
+.itemAnimation {
+    background-size: 25px;
+}
+
+/*.itemActive .rect {*/
+/*    !*background: var(--background-color-option);*!*/
+/*    border-color: var(--background-color-option) transparent var(--background-color-option) var(--background-color-option);*/
+/*    border-width: 1px;*/
+/*    border-style: solid;*/
+/*    transition: all 0.2s ease-in;*/
+/*    border-top-left-radius: 35px;*/
+/*    border-bottom-left-radius: 35px;*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    display: block;*/
+/*    height: 36px;*/
+/*    z-index: 2;*/
+/*    width: 100%;*/
+/*}*/
+
+/*.itemActive .upperCircle {*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*    top: -20px;*/
+/*    right: -20px;*/
+/*    width: 20px;*/
+/*    z-index: 2;*/
+/*    height: 20px;*/
+/*    border-bottom-right-radius: 20px;*/
+/*    border-color: transparent var(--background-color-option) var(--background-color-option) transparent;*/
+/*    border-width: 1px;*/
+/*    border-style: solid;*/
+/*    background: var(--background-color-secondary);*/
+/*}*/
+
+/*.itemActive:after {*/
+/*    content: "";*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*    z-index: 1;*/
+/*    right: -20px;*/
+/*    height: 76px;*/
+/*    width: 20px;*/
+/*    top: -20px;*/
+/*    !*background: var(--background-color-option);*!*/
+/*    transition: all 0.2s ease-in;*/
+/*    border-top-left-radius: 20px;*/
+/*    border-bottom-left-radius: 20px;*/
+
+/*}*/
+
+.itemActive .rect {
+    animation-duration: 0.5s;
+    animation-name: slidein;
+}
+
+.itemActive .upperCircle {
+    animation-duration: 0.5s;
+    animation-name: up-circle-animation;
+
+}
+
+.itemActive .bottomCircle {
+    animation-duration: 0.5s;
+    animation-name: bottom-circle-animation;
+
+}
+
+.itemActive:after {
+    animation-duration: 0.5s;
+    animation-name: after-circle-animation;
+}
+
+
+@keyframes after-circle-animation {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 20px;
+    }
+}
+
+
+@keyframes bottom-circle-animation {
+    from {
+        border-top-right-radius: 0px
+    }
+
+    to {
+        border-top-right-radius: 20px
+    }
+}
+
+@keyframes up-circle-animation {
+    from {
+        border-bottom-right-radius: 0px
+    }
+
+    to {
+        border-bottom-right-radius: 20px
+    }
+}
+
+@keyframes slidein {
+    from {
+        width: 10px;
+        left: 180px;
+    }
+
+    to {
+        width: 100%;
+        left: 0;
+    }
+}
+
+@media(max-width: 768px) {
+    .item {
+        margin: 0;
+    }
+
+    .navlinkContent span {
+        display: none;
+    }
+
+    .itemActive .navlinkContent span {
+        display: block;
+        margin-right: 12px;
+    }
+
+    .navlinkContent svg {
+        position: relative;
+        top: 1px;
+    }
+
+    .navlinkContent svg * {
+        fill: #ffffff!important;
+    }
+
+    .itemActive .navlinkContent {
+        border-radius: var(--secondary-border-radius);
+        background-color: #250266;
+        padding: 20px;
+    }
+
+    .navlinkContent {
+        width: auto;
+        margin: 8px;
+    }
+}

@@ -1,0 +1,31 @@
+:root {
+    --main-border-radius: 35px;
+    --background-color-main: radial-gradient(ellipse at center top, rgba(40, 2, 116, 1) 0%, rgba(19, 0, 22, 1) 100%);
+    --background-color-option: #c918a2;
+    --main-border-radius: 50px;
+    --secondary-border-radius: 15px;
+    --input-border-radius: 10px;
+    --background-color-secondary: linear-gradient(235deg, rgba(25, 1, 73, 1), rgba(19, 0, 22, 1));
+    --font-color-main: #ffffff;
+    --font-color-secondary: #ffffff;
+    /*--main-gradient: linear-gradient(235deg, #2acf53, #b7df5d, #e7765c, #f814bc, #3c20c8, #258bb7);*/
+    --main-gradient: linear-gradient(235deg, #cd32be, #cd32be, #db19a6, #f814bc);
+    --color-grey: #b7b7b7;
+    --blue-background: #431779;
+    --blue-background-hover: #2f0062;
+    --box-shadow-primary: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+    /*--basic-border-radius: 25px;*/
+    /*--color-blue: #2b8bff;*/
+    /*--color-green: #00a54b;*/
+    /*--color-light-blue-grey: #bdc2cb;*/
+    /*--color-white-hover: #f8f8f8;*/
+    /*--color-dark-blue: #2d3c58;*/
+    /*--font-color-dark-blue: #738590;*/
+    /*--border-grey-color: #ececec;*/
+    /*--background-color-dark-blue: #1d3140;*/
+    /*--box-shadow-primary: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;*/
+    /*--icon-l: 28px;*/
+    /*--icon-m: 24px;*/
+    /*--icon-s: 16px;*/
+}

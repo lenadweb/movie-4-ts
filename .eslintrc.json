@@ -26,6 +26,7 @@
     ],
     "rules": {
         "no-use-before-define": "off",
+        "react/destructuring-assignment": "off",
         "import/no-cycle": "off",
         "@typescript-eslint/no-use-before-define": [
             "error"

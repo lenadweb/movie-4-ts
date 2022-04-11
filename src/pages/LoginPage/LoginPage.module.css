@@ -1,0 +1,65 @@
+.wrapper {
+    background: var(--background-color-main);
+}
+
+.inner {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: all 0.2s ease-in;
+    overflow: hidden;
+    background: url("./../../assets/images/Constellation1.webp") bottom 40px right 40px,
+    url("./../../assets/images/Constellation2.webp") bottom 200px right 440px,
+    url("./../../assets/images/Constellation3.webp") top 110px right 300px,
+    url("./../../assets/images/Constellation4.webp") top 40px left 200px,
+    url("./../../assets/images/Constellation5.webp") bottom 60px left 340px,
+    url("./../../assets/images/Constellation6.webp") center 30px,
+    url("./../../assets/images/Constellation7.webp") center left 400px;
+    background-size: 17vh;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100vh;
+}
+
+.form {
+    position: relative;
+    padding: 48px;
+    background: rgba(22, 0, 46, 0.72);
+    border-radius: var(--secondary-border-radius);
+    overflow: hidden;
+    z-index: 10;
+    color: #ffffff;
+}
+
+.form:after {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: backdrop-filter 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.formLoading:after {
+    background-image: url("./../../assets/images/heart-svg-animation.svg");
+    background-size: 50px;
+    pointer-events: initial;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 1;
+    backdrop-filter: blur(10px);
+}
+
+.diamonds {
+    z-index: 1;
+}
+
+

@@ -1,0 +1,33 @@
+.item {
+    display: block;
+    padding: 10px 16px;
+    border-radius: var(--input-border-radius);
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+    /*background: linear-gradient(transparent,rgba(0, 0, 0, 0.4)) top/100% 800%;*/
+    background-color: #2e189b;
+    color: #ffffff;
+    width: 100%;
+    border: none;
+}
+
+.item:hover {
+    background-position: bottom;;
+}
+
+.icon {
+    margin-right: 8px;
+}
+
+.content {
+    position: relative;
+    left: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnWithIcon {
+}

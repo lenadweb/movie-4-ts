@@ -1,14 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getToken } from 'helpers/AuthHelper';
-import { authApi } from '../../api/AuthApi';
-
-export interface IUserState {
-    username: string | null;
-    token: string | null;
-    role: string | null;
-    email: string | null;
-    id: number | null;
-}
+import { getToken } from 'helpers/authHelper';
+import { IStore, IUserState } from 'types/store';
+import { baseApi } from '../../api/BaseApi';
 
 const initialState = {
     username: null,
@@ -34,7 +27,7 @@ const UserSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addMatcher(
-                authApi.endpoints.login.matchFulfilled,
+                baseApi.endpoints.login.matchFulfilled,
                 (state: IUserState, { payload }: { payload: any }) => {
                     if (payload.access_token) {
                         state.token = payload.access_token;
@@ -42,12 +35,10 @@ const UserSlice = createSlice({
                 },
             )
             .addMatcher(
-                authApi.endpoints.getMe.matchFulfilled,
+                baseApi.endpoints.registration.matchFulfilled,
                 (state: IUserState, { payload }: { payload: any }) => {
                     if (payload) {
-                        state.email = payload.email;
-                        state.id = payload.id;
-                        state.role = payload.role.name;
+                        console.log(payload);
                     }
                 },
             );
@@ -61,3 +52,14 @@ export const {
 export default UserSlice.reducer;
 export const selectAuth = (state: IStore): boolean => !!state.user.token;
 export const selectUser = (state: IStore): IUserState => state.user;
+//
+// .addMatcher(
+//     baseApi.endpoints.getMe.matchFulfilled,
+//     (state: IUserState, { payload }: { payload: any }) => {
+//         if (payload) {
+//             state.email = payload.email;
+//             state.id = payload.id;
+//             state.role = payload.role.name;
+//         }
+//     },
+// );

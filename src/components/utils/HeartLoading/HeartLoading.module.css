@@ -1,0 +1,286 @@
+.heart {
+    transition: all 0.25s ease-in;
+    opacity: 1;
+    height: 100%;
+    width: 100%;
+}
+
+.heartItems {
+    position: relative;
+    top: -50px;
+    width: 220px;
+    height: 220px;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-name: scale;
+    -webkit-animation-duration: 1000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-name: scale;
+    -moz-animation-duration: 1000ms;
+}
+
+.inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart svg {
+    position: absolute;
+}
+
+
+/*.heart>div svg * {*/
+/*    stroke: #c918a2;*/
+/*}*/
+
+
+.blue svg * {
+    stroke: #60B8BB;
+}
+
+.pink svg * {
+    stroke: #C12C88;
+}
+
+.pink1 svg * {
+    stroke: #BC2BAC;
+}
+
+.pink2 svg * {
+    stroke: #9420C4;
+}
+
+.pink3 svg * {
+    stroke: #D793C9;
+}
+
+.pink4 svg * {
+    stroke: #E0ADC0;
+}
+
+.pink5 svg * {
+    stroke: #F0ECBE;
+}
+
+.pink6 svg * {
+    stroke: #81E7F3;
+}
+
+.pink7 svg * {
+    stroke: #DEF1D9;
+}
+
+.pink8 svg * {
+    stroke: #F2E7E8;
+}
+
+.pink9 svg * {
+    stroke: #F6F2FA;
+}
+
+.pink10 svg * {
+    stroke: #F1EEF7;
+}
+
+.pink11 svg * {
+    stroke: #ECDBF4;
+}
+
+.pink12 svg * {
+    stroke: #C16BAC;
+}
+
+.whiteGreen svg * {
+    stroke: #61C6A5;
+}
+
+.orange svg * {
+    stroke: #D88271;
+}
+
+.yellow svg * {
+    stroke: #E0E56D;
+}
+
+.green svg * {
+    stroke: #68D063;
+}
+
+.exitHeart {
+    transform: scale(2.5);
+    opacity: 0;
+}
+
+.exitHeart .heartItems {
+    animation-play-state: paused;
+}
+
+@keyframes scale {
+    0% {
+        -webkit-transform: scale(1)
+    }
+    40% {
+        -webkit-transform: scale(1)
+    }
+    48% {
+        -webkit-transform: scale(1.2)
+    }
+    52% {
+        -webkit-transform: scale(1.2)
+    }
+    60% {
+        -webkit-transform: scale(1)
+    }
+    100% {
+        -webkit-transform: scale(1)
+    }
+}
+
+.heart {
+    transition: all 0.25s ease-in;
+    opacity: 1;
+}
+
+.heartItems {
+    position: relative;
+    top: -50px;
+    width: 220px;
+    height: 220px;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-name: scale;
+    -webkit-animation-duration: 1000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-name: scale;
+    -moz-animation-duration: 1000ms;
+}
+
+.inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart svg {
+    position: absolute;
+}
+
+
+/*.heart>div svg * {*/
+/*    stroke: #c918a2;*/
+/*}*/
+
+
+.blue svg * {
+    stroke: #60B8BB;
+}
+
+.pink svg * {
+    stroke: #C12C88;
+}
+
+.pink1 svg * {
+    stroke: #BC2BAC;
+}
+
+.pink2 svg * {
+    stroke: #9420C4;
+}
+
+.pink3 svg * {
+    stroke: #D793C9;
+}
+
+.pink4 svg * {
+    stroke: #E0ADC0;
+}
+
+.pink5 svg * {
+    stroke: #F0ECBE;
+}
+
+.pink6 svg * {
+    stroke: #81E7F3;
+}
+
+.pink7 svg * {
+    stroke: #DEF1D9;
+}
+
+.pink8 svg * {
+    stroke: #F2E7E8;
+}
+
+.pink9 svg * {
+    stroke: #F6F2FA;
+}
+
+.pink10 svg * {
+    stroke: #F1EEF7;
+}
+
+.pink11 svg * {
+    stroke: #ECDBF4;
+}
+
+.pink12 svg * {
+    stroke: #C16BAC;
+}
+
+.whiteGreen svg * {
+    stroke: #61C6A5;
+}
+
+.orange svg * {
+    stroke: #D88271;
+}
+
+.yellow svg * {
+    stroke: #E0E56D;
+}
+
+.green svg * {
+    stroke: #68D063;
+}
+
+.exitHeart {
+    transform: scale(2.5);
+    opacity: 0;
+}
+
+.exitHeart .heartItems {
+    animation-play-state: paused;
+}
+
+@keyframes scale {
+    0% {
+        -webkit-transform: scale(1)
+    }
+    40% {
+        -webkit-transform: scale(1)
+    }
+    48% {
+        -webkit-transform: scale(1.2)
+    }
+    52% {
+        -webkit-transform: scale(1.2)
+    }
+    60% {
+        -webkit-transform: scale(1)
+    }
+    100% {
+        -webkit-transform: scale(1)
+    }
+}
+
+.containerSmall svg {
+    width: 100%;
+    height: auto;
+}

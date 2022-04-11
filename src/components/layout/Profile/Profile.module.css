@@ -1,0 +1,32 @@
+.wrapper {
+    position: relative;
+}
+
+.avatar {
+    cursor: pointer;
+}
+
+.avatarWrapper {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: var(--secondary-border-radius);
+    background-color: var(--blue-background);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.username {
+    margin-left: 16px;
+}
+
+.menu {
+    position: absolute;
+    right: 0px;
+    top: 58px;
+    padding: 8px 16px;
+    background-color: var(--blue-background);
+    color: #ffffff;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow-primary);
+}

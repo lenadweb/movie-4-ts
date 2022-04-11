@@ -1,0 +1,8 @@
+.item {
+    padding: 2px 8px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 10px;
+    line-height: 1.2;
+    white-space: pre;
+}

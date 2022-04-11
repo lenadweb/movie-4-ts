@@ -1,0 +1,133 @@
+.movieImage {
+    padding: 4px 0px 4px 4px;
+}
+
+.movieImage img {
+    width: 100%;
+    border-radius: 35px;
+    object-fit: cover;
+}
+
+.movieRating {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    right: 8px;
+}
+
+.movieRelease {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.movieTitle {
+    font-size: 14px;
+    font-weight: bold;
+    padding-right: 45px;
+}
+
+.movieGenres {
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.movieGenres p{
+    margin: 0 40px 0 0;
+}
+
+.movieImage .load {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.blur {
+    /*backdrop-filter: blur(70px);*/
+    width: 100%;
+    height: 100%;
+}
+
+.movieInformation {
+    margin-left: 10px;
+    position: relative;
+    flex: 1 1 100%;
+    padding: 10px;
+}
+
+.movieContainer {
+    border-radius: var(--secondary-border-radius);
+    background: var(--background-color-secondary);
+    color: #ffffff;
+    padding: 8px;
+    width: 100%;
+    z-index: 10;
+    position: inherit;
+    height: 100%;
+    display: flex;
+}
+
+.movieItem {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    display: block;
+    width: 100%;
+    min-height: 100px;
+    max-width: 380px;
+    position: relative;
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+    opacity:0;
+    animation: show 0.4s 1;
+    animation-fill-mode: forwards;
+}
+
+.borderGradient {
+    display: none;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(160deg, #2acf53, #b7df5d, #e7765c, #f814bc, #3c20c8, #258bb7);
+    /*animation: gradient 5s ease infinite;*/
+    background-size: 10000%;
+}
+
+
+.lazyLoadContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: all 0.2s ease-in;
+}
+
+.enterDone {
+    opacity: 1;
+}
+
+.exitDone {
+    opacity: 0;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

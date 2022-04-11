@@ -1,0 +1,13 @@
+.container {
+    padding: 0.8rem 1.6rem;
+    border-radius: 15px;
+    background: #181818;
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.inner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

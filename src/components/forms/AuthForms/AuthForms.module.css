@@ -1,0 +1,24 @@
+.wrapper {
+    transition: all 0.2s ease-in;
+}
+
+.pink {
+    color: var(--background-color-option);
+}
+
+.container {
+    min-width: 450px;
+}
+
+.textAlignCenter {
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.textInput input {
+    border-width: 2px;
+}

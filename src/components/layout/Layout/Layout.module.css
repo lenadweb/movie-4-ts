@@ -1,0 +1,68 @@
+.darkTheme {
+
+}
+
+.app {
+    background: var(--background-color-main);
+    transition: all 0.2s ease-in;
+}
+
+.container {
+    z-index: 2;
+}
+
+.content {
+    transition: all 0.2s ease-in;
+    background: url("./../../../assets/images/Constellation1.webp") bottom 40px right 40px,
+    url("./../../../assets/images/Constellation2.webp") bottom 200px right 440px,
+    url("./../../../assets/images/Constellation3.webp") top 110px right 300px,
+    url("./../../../assets/images/Constellation4.webp") top 40px left 200px,
+    url("./../../../assets/images/Constellation5.webp") bottom 60px left 340px,
+    url("./../../../assets/images/Constellation6.webp") center 30px,
+    url("./../../../assets/images/Constellation7.webp") center left 400px;
+    background-size: 17vh;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100vh;
+    padding: 24px 0 24px 24px;
+    display: flex;
+    z-index: 2;
+}
+
+.mainContent {
+    padding: 6px 12px 24px 24px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pageWrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 24px;
+    flex: 1;
+    padding-right: 24px;
+    height: calc(100vh - 140px);
+}
+
+@media(max-width: 768px) {
+    .content {
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .mainContent {
+        padding: 12px 12px 0 12px;
+    }
+
+    .pageWrapper {
+        padding-right: 0;
+    }
+
+    .pageWrapper::-webkit-scrollbar {
+        width: 0;
+    }
+}

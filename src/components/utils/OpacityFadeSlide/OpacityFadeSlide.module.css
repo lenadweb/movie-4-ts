@@ -1,0 +1,37 @@
+.enter {
+    opacity: 0 !important;
+}
+
+.enterActive {
+    opacity: 1 !important;
+    transition: opacity 200ms;
+}
+
+.exit {
+    opacity: 1 !important;
+}
+
+.enterDone {
+    opacity: 1 !important;
+}
+
+.exitActive {
+    opacity: 0 !important;
+    transition: all 200ms;
+}
+
+.appear {
+    opacity: 0!important;
+}
+
+.exitDone {
+    opacity: 0!important;
+    height: 0!important;
+}
+
+.item {
+    transition: all 200ms ease-in-out;
+    overflow: hidden;
+    opacity: 0;
+    border-radius: var(--secondary-border-radius);
+}

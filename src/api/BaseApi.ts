@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { store } from 'redux/store/store';
 
-export const API_URL = 'http://192.168.1.41:8000/api/v1';
-export const API_URL_TEST = 'http://195.161.62.60:8080/api/v1';
+export const API_URL = 'https://devlo.ru/api/';
 
 const prepareHeaders = (headers: any): any => {
     const { token } = store.getState().user;
@@ -15,9 +14,28 @@ const prepareHeaders = (headers: any): any => {
 export const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: API_URL_TEST,
+        baseUrl: API_URL,
         prepareHeaders,
     }),
-    tagTypes: ['comments', 'user', 'layers'],
-    endpoints: () => ({}),
+    endpoints: (builder: any) => ({
+        login: builder.mutation({
+            query: (body: any) => ({
+                url: 'login',
+                method: 'POST',
+                body,
+            }),
+        }),
+        registration: builder.mutation({
+            query: (body: any) => ({
+                url: 'registration',
+                method: 'POST',
+                body,
+            }),
+        }),
+    }),
 });
+
+export const {
+    useLoginMutation,
+    useRegistrationMutation,
+} = baseApi;

@@ -1,0 +1,15 @@
+.container {
+    border-radius: var(--main-border-radius);
+    display: inline-block;
+    padding: 12px 64px;
+    font-size: 18px;
+    background-color: #ca1f25;
+    color: #ffffff;
+    font-weight: 900;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+}
+
+.container:hover {
+}

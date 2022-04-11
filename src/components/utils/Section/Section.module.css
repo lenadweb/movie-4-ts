@@ -1,0 +1,13 @@
+.wrapper {
+    background-size: cover;
+    background-position: center;
+    background-color: #0000004a;
+    padding: 24px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 5;
+    color: #ffffff;
+    border-radius: 25px;
+}

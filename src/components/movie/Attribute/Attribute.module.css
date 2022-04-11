@@ -1,0 +1,13 @@
+.container {
+    margin-top: 16px;
+    display: flex;
+}
+
+.caption {
+    color: var(--color-grey);
+}
+
+.content {
+    color: #ffffff;
+    padding-left: 8px;
+}

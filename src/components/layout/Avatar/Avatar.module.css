@@ -1,0 +1,24 @@
+.img {
+    display: block;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    background-color: #ffffff;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.imgSizeS {
+    width: 24px;
+    height: 24px;
+}
+
+.imgSizeM {
+    width: 52px;
+    height: 52px;
+}
+
+.imgSizeL {
+    width: 150px;
+    height: 150px;
+}

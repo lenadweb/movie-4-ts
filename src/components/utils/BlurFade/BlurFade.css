@@ -1,0 +1,11 @@
+.blurExit {
+    backdrop-filter: blur(0);
+}
+.blurEnter {
+    backdrop-filter: blur(100px);
+}
+
+.container {
+    transition: backdrop-filter 0.2s ease-in;
+    backdrop-filter: blur(0);
+}

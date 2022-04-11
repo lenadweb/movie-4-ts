@@ -1,0 +1,77 @@
+.container {
+    padding: 16px 32px;
+    background-color: #181818;
+    border-radius: 25px;
+    margin-top: 24px;
+}
+
+.starContainer {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.star {
+    margin-left: 8px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    background-size: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("./../../../assets/images/heart-svg-animation.svg");
+}
+
+.starActive {
+    background-image: url("./../../../assets/images/heart-svg-animation-filled.svg");
+}
+
+.star:first-child {
+    margin: 0;
+}
+
+.imdb {
+    margin-top: 6px;
+    height: 16px;
+    padding-left: 50px;
+    background-size: 40px;
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-image: url("./../../../assets/images/imdb.svg");
+}
+
+.ratingWrapper {
+    display: flex;
+    align-items: center;
+    color: #9a9a9a;
+    border-bottom: 1px solid var(--background-color-option);
+}
+
+.rating {
+    font-weight: bold;
+    font-size: 40px;
+    color: var(--background-color-option);
+}
+
+.ratingExtraInformation {
+    letter-spacing: 1.5px;
+    font-size: 12px;
+    padding-right: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 32px;
+    margin-left: 8px;
+}
+
+.critics {
+    padding-left: 12px;
+    font-size: 12px;
+    text-align: center;
+    border-left: 1px solid var(--background-color-option);;
+}
+
+.criticsRating {
+    font-size: 16px;
+    /*color: var(--background-color-option);*/
+}
