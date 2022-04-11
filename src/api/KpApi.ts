@@ -30,7 +30,7 @@ export const kpApi = createApi({
         }),
         getMovieInformation: builder.query({
             query: (movieId) => ({
-                url: `/v2.2/films/${movieId}?append_to_response=BUDGET,RATING`,
+                url: `/v2.1/films/${movieId}?append_to_response=BUDGET,RATING`,
                 method: 'GET',
             }),
         }),

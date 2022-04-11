@@ -5,6 +5,7 @@ import styles from './CircleButton.module.css';
 interface ICircleButton {
     icon: string;
     onClick: () => void
+
     className?: string;
 }
 

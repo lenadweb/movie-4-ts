@@ -6,6 +6,7 @@ import Image from 'components/media/Image/Image';
 import H from 'components/type/H/H';
 import Block from 'components/utils/Block/Block';
 import Row from 'components/utils/Row/Row';
+
 import { Link } from 'react-router-dom';
 import styles from '../AuthForms.module.css';
 import TextButton from '../../Buttons/TextButton/TextButton';

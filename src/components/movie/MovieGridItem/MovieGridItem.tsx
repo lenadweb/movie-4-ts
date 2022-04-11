@@ -16,6 +16,7 @@ interface IMovieGridItem {
     year: string;
     ratingFilm: number;
     delay: number;
+
 }
 
 const MovieGridItem:FC<IMovieGridItem> = ({ id, poster, name, genres, year, ratingFilm, delay }) => {

@@ -9,10 +9,6 @@ import useAuth from '../../hooks/useAuth';
 import RegistrationForm from '../../components/forms/AuthForms/RegistrationForm/RegistrationForm';
 import { useLoginMutation, useRegistrationMutation } from '../../api/BaseApi';
 
-type LoginResponseType = {
-    'access_token': string;
-}
-
 const LoginPage: FC = () => {
     const [login, { isLoading: isLoginLoading, error: loginError }] = useLoginMutation();
     const [registration, { isLoading: isRegLoading, error: regError }] = useRegistrationMutation();
@@ -46,7 +42,7 @@ const LoginPage: FC = () => {
     };
 
     useEffect(() => {
-        if (isAuth) navigate('/map');
+        if (isAuth) navigate('/');
     }, [isAuth, navigate]);
 
     console.log(location);

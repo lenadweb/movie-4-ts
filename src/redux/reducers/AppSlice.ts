@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getToken } from 'helpers/authHelper';
 import { IAppSlice, IMoviesSlice, IStore, IUserState } from 'types/store';
-import { authApi } from '../../api/AuthApi';
 import { kpApi } from '../../api/KpApi';
 
 const initialState:IAppSlice = {

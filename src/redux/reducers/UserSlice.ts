@@ -29,8 +29,8 @@ const UserSlice = createSlice({
             .addMatcher(
                 baseApi.endpoints.login.matchFulfilled,
                 (state: IUserState, { payload }: { payload: any }) => {
-                    if (payload.access_token) {
-                        state.token = payload.access_token;
+                    if (payload.token) {
+                        state.token = payload.token;
                     }
                 },
             )

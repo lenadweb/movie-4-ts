@@ -11,7 +11,7 @@
     /*--main-gradient: linear-gradient(235deg, #2acf53, #b7df5d, #e7765c, #f814bc, #3c20c8, #258bb7);*/
     --main-gradient: linear-gradient(235deg, #cd32be, #cd32be, #db19a6, #f814bc);
     --color-grey: #b7b7b7;
-    --blue-background: #431779;
+    --blue-background: rgba(22, 0, 46, 0.72);
     --blue-background-hover: #2f0062;
     --box-shadow-primary: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 

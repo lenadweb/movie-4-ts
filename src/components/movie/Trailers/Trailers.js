@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactHlsPlayer from 'react-hls-player';
 
-const Trailers = ({trailers}) => {
+const Trailers = ({ trailers }) => {
     const playerRef = React.useRef();
 
     function playVideo() {
@@ -15,7 +15,7 @@ const Trailers = ({trailers}) => {
     function toggleControls() {
         playerRef.current.controls = !playerRef.current.controls;
     }
-    const trailersToShow = trailers?.length && trailers?.filter(item=>item.site = "KINOPOISK_WIDGET");
+    const trailersToShow = trailers?.length && trailers?.filter((item) => item.site = 'KINOPOISK_WIDGET');
 
     return (
         <div>

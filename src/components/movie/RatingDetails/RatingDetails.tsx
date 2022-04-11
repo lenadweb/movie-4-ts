@@ -39,7 +39,7 @@ const RatingDetails:FC<{rating: any}> = ({ rating }) => {
                 </div>
                 <div className={styles.ratingExtraInformation}>
                     <div className={styles.maxRating}>/10</div>
-                    <div className={styles.voteCount}>{formatNumberThousand(rating.ratingVoteCount)}</div>
+                    <div className={styles.voteCount}>{formatNumberThousand(rating.ratingImdbVoteCount)}</div>
                 </div>
                 <Display show={rating.ratingFilmCritics && rating.ratingFilmCritics !== 'null'}>
                     <div className={styles.critics}>

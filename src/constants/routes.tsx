@@ -4,6 +4,7 @@ import Layout from '../components/layout/Layout/Layout';
 import RandomMovies from '../pages/RandomMovies/RandomMovies';
 import MoviePage from '../pages/MoviePage/MoviePage';
 import LoginPage from '../pages/LoginPage/LoginPage';
+import LogoutPage from '../pages/LogoutPage/LogoutPage';
 
 export const appRoutes: Array<IRoute> = [
     {
@@ -85,7 +86,7 @@ export const appRoutes: Array<IRoute> = [
     },
     {
         path: 'logout',
-        element: '',
+        element: <LogoutPage />,
         name: 'Выход',
     },
 ];

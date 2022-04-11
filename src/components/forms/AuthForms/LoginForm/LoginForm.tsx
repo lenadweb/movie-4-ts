@@ -27,14 +27,14 @@ const LoginForm: FC<ILoginForm> = ({ onSubmit, error }) => {
         formState: { errors: validateErrors },
     } = useForm({
         defaultValues: {
-            email: '',
+            username: '',
             password: '',
             stayInSystem: true,
         },
     });
 
-    const onSubmitHandler = ({ email, password, stayInSystem }: any): void => {
-        onSubmit(email, password, stayInSystem);
+    const onSubmitHandler = ({ username, password, stayInSystem }: any): void => {
+        onSubmit(username, password, stayInSystem);
     };
 
     return (
@@ -47,22 +47,22 @@ const LoginForm: FC<ILoginForm> = ({ onSubmit, error }) => {
                     </H>
                 </Block>
                 <Block>
-                    <InputLabel caption="Email" />
+                    <InputLabel caption="Имя пользователя" />
                     <TextInput
                         className={styles.textInput}
                         validate={
-                            register('email', {
+                            register('username', {
                                 required: 'Заполните поле',
                                 pattern: {
-                                    value: /\S+@\S+\.\S+/,
-                                    message: 'Введите корректный Email',
+                                    value: /^[A-Za-z0-9]+([A-Za-z0-9]*|[._-]?[A-Za-z0-9]+)*$/g,
+                                    message: 'Допустимы только цифры и латинские символы',
                                 },
                             })
                         }
                     />
                     {
-                        validateErrors.email
-                        && <InlineAlert caption={validateErrors.email.message || ''} />
+                        validateErrors.username
+                        && <InlineAlert caption={validateErrors.username.message || ''} />
                     }
                 </Block>
                 <Block>

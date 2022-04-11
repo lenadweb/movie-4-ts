@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
-import API from "@/api/API";
-import {useDispatch, useSelector} from "react-redux";
-import styles from "./Torrents.module.css";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import API from '@/api/API';
+import styles from './Torrents.module.css';
 
-const Torrents = ({movieInformation, onClose}) => {
+const Torrents = ({ movieInformation, onClose }) => {
     const dispatch = useDispatch();
-    const torrents = useSelector(state => state.movies.torrents);
+    const torrents = useSelector((state) => state.movies.torrents);
 
     useEffect(async () => {
         await API.getYTSTorrent(movieInformation.externalId.imdbId);
@@ -25,15 +25,23 @@ const Torrents = ({movieInformation, onClose}) => {
                     <div>Сиды</div>
                 </div>
                 {
-                    torrents.map((item, index) => <a className={styles.torrentItem} key={index} href={`${item?.url}`}
-                                                     target="_blank" download={true}>
-                        <div>{movieInformation.data.nameEn}</div>
-                        <div>{item.type}</div>
-                        <div>{item.quality}</div>
-                        <div>{item.size}</div>
-                        <div>En</div>
-                        <div>{item.seeds}</div>
-                    </a>)
+                    torrents.map((item, index) => (
+                        <a
+                            className={styles.torrentItem}
+                            key={index}
+                            href={`${item?.url}`}
+                            target="_blank"
+                            download
+                            rel="noreferrer"
+                        >
+                            <div>{movieInformation.data.nameEn}</div>
+                            <div>{item.type}</div>
+                            <div>{item.quality}</div>
+                            <div>{item.size}</div>
+                            <div>En</div>
+                            <div>{item.seeds}</div>
+                        </a>
+                    ))
                 }
             </div>
         </div>

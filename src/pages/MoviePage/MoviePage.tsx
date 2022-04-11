@@ -69,6 +69,8 @@ const MoviePage:FC = () => {
         } else setWatch(true);
     };
 
+    console.log(movieInformation);
+
     const attributes = [
         director
             ? (
@@ -82,8 +84,8 @@ const MoviePage:FC = () => {
             ? (
                 <Attribute
                     key={2}
-                    caption={movieInformation.countries.length > 1 ? 'Страны' : 'Страна'}
-                    content={movieInformation.countries.map((item: any) => item.country).join(', ')}
+                    caption={movieInformation.data?.countries.length > 1 ? 'Страны' : 'Страна'}
+                    content={movieInformation.data?.countries.map(({ country }: any) => country).join(', ')}
                 />
             ) : null,
         movieInformation?.budget?.budget
@@ -117,41 +119,41 @@ const MoviePage:FC = () => {
                     {movieInformation && (
                         <div className={styles.informationInner}>
                             <div className={styles.poster}>
-                                <LoadBackground poster={movieInformation.posterUrl} />
+                                <LoadBackground poster={movieInformation.data.posterUrl} />
                             </div>
                             <div className={styles.movieInformation}>
                                 <div className={styles.movieTypeContainer}>
                                     <div className={styles.movieType}>
                                         {
                                             // @ts-ignore
-                                            movieTypes[movieInformation.type]
+                                            movieTypes[movieInformation.data.type]
                                         }
                                     </div>
                                     <div className={styles.movieGenres}>
-                                        {movieInformation.genres.map((item:any) => item.genre).join(', ')}
+                                        {movieInformation.data.genres.map((item:any) => item.genre).join(', ')}
                                     </div>
                                 </div>
                                 <div className={styles.row}>
                                     <div>
                                         <div className={styles.movieTitle}>
-                                            <span className={styles.bold}>{movieInformation.nameRu}</span>
+                                            <span className={styles.bold}>{movieInformation.data.nameRu}</span>
                                             <span>
                                                 {' '}
                                                 (
-                                                {movieInformation.year}
+                                                {movieInformation.data.year}
                                                 )
                                             </span>
                                         </div>
                                         {attributes}
                                     </div>
-                                    <Display show={movieInformation.ratingImdb}>
+                                    <Display show={movieInformation?.rating.ratingImdb}>
                                         <div className={styles.movieRatingContainer}>
-                                            <RatingDetails rating={movieInformation} />
+                                            <RatingDetails rating={movieInformation.rating} />
                                         </div>
                                     </Display>
                                 </div>
-                                <Display show={movieInformation.description}>
-                                    <div className={styles.movieDescription}>{movieInformation.description}</div>
+                                <Display show={movieInformation.data.description}>
+                                    <div className={styles.movieDescription}>{movieInformation.data.description}</div>
                                 </Display>
                                 <div className={styles.movieButtons}>
                                     <CircleButton
