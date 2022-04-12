@@ -3,37 +3,28 @@ import prettyBytes from 'pretty-bytes';
 import Margin from 'components/utils/Margin/Margin';
 import H from 'components/utils/H/H';
 import axios from 'axios';
+import downloadIcon from 'assets/images/download.svg';
 import { formatNumberThousand } from '../../../helpers/formatHelper';
 import StaticTable from '../../tables/StaticTable/StaticTable';
 import { API_URL, useGetTorrentsMutation } from '../../../api/BaseApi';
 import Section from '../../utils/Section/Section';
 import styles from './Torrents.module.css';
-import HeartLoading from '../../utils/HeartLoading/HeartLoading';
 import HeartLoadingSmall from '../../utils/HeartLoading/HeartLoadingSmall';
-import TextButton from '../../forms/Buttons/TextButton/TextButton';
 import { downloadFile } from '../../../helpers/commonHelper';
+import Icon from '../../media/Icon/Icon';
 
 interface ITorrents {
-    movieInformation: any
+    filmId: number;
+    request: string;
 }
 
-const Torrents:FC<ITorrents> = ({ movieInformation }) => {
+const Torrents:FC<ITorrents> = ({ filmId, request }) => {
     const [getTorrents, { isLoading, data }] = useGetTorrentsMutation();
-
-    const onMagnetHandler = async (id:number):Promise<void> => {
-        const response:any = await axios({
-            method: 'GET',
-            url: `${API_URL}torrents/magnet?id=${id}`,
-        });
-        console.log(response);
-        const urlDownload = response?.data?.link;
-        window.open(urlDownload);
-    };
 
     const onDownloadHandler = async (id:number, title:string):Promise<void> => {
         const response = await axios({
             method: 'GET',
-            url: `${API_URL}torrents/download?id=${id}`,
+            url: `${API_URL}torrents/download?id=${id}&filename=${filmId}.torrent`,
             responseType: 'blob',
         });
         const urlDownload = window.URL.createObjectURL(new Blob([response.data]));
@@ -41,16 +32,17 @@ const Torrents:FC<ITorrents> = ({ movieInformation }) => {
     };
 
     useEffect(() => {
-        if (movieInformation?.data?.filmId) getTorrents(`${movieInformation.data.nameRu} ${movieInformation.data.year}`);
-    }, [movieInformation?.data?.filmId]);
+        // if (filmId) getTorrents(request);
+        console.log(filmId);
+    }, [filmId]);
 
     const commonValuesMl = useMemo(() => (data as Array<any>)?.map(({ title, seeds, leeches, size }:any) => ({
         col1: title,
         col2: seeds,
         col3: leeches,
         col4: size,
-        col5: 'клик',
-        col6: 'клик',
+        col5: 'RT',
+        col6: 'скачать',
     })) || [], [data]);
 
     const commonColumnMl = useMemo(() => [
@@ -61,29 +53,34 @@ const Torrents:FC<ITorrents> = ({ movieInformation }) => {
         {
             Header: 'Сиды',
             accessor: 'col2' as const,
-            Cell: ({ value }:any) => formatNumberThousand(value),
+            Cell: ({ value }:any) => <div className={styles.textCenter}>{formatNumberThousand(value)}</div>,
         },
         {
             Header: 'Личи',
             accessor: 'col3' as const,
-            Cell: ({ value }:any) => formatNumberThousand(value),
+            Cell: ({ value }:any) => <div className={styles.textCenter}>{formatNumberThousand(value)}</div>,
         },
         {
             Header: 'Размер',
             accessor: 'col4' as const,
-            Cell: ({ value }:any) => prettyBytes(value),
+            Cell: ({ value }:any) => <div className={styles.textCenter}>{prettyBytes(value)}</div>,
         },
         {
-            Header: 'Magnet',
+            Header: 'Источник',
             accessor: 'col5' as const,
-            // eslint-disable-next-line react/no-unstable-nested-components
-            Cell: ({ value, row }:any) => <TextButton caption={value} onClick={() => onMagnetHandler((data as any[])?.[row.index]?.id)} />,
+            Cell: ({ value }:any) => <div className={styles.textCenter}>{value}</div>,
         },
         {
             Header: 'Скачать',
             accessor: 'col6' as const,
-            // eslint-disable-next-line react/no-unstable-nested-components
-            Cell: ({ value, row }:any) => <TextButton caption={value} onClick={() => onDownloadHandler((data as any[])?.[row.index]?.id, (data as any[])?.[row.index]?.title)} />,
+            Cell: ({ value, row }:any) => (
+                <Icon
+                    src={downloadIcon}
+                    className={styles.downloadBtn}
+                    size="xs"
+                    onClick={() => onDownloadHandler((data as any[])?.[row.index]?.id, (data as any[])?.[row.index]?.title)}
+                />
+            ),
         },
     ], [data]);
     return (

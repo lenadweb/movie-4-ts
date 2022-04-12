@@ -10,13 +10,10 @@ import { useGetMeQuery } from '../../../api/BaseApi';
 
 const Layout: FC = () => {
     const token = useSelector(selectToken);
-    const data = useGetMeQuery(token, {
+    useGetMeQuery(token, {
         skip: !token,
     });
 
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
     return (
         <div className={cn(styles.app)}>
             <div className={styles.container}>

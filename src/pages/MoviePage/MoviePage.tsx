@@ -31,17 +31,20 @@ import Prequels from '../../components/movie/Prequels/Prequels';
 import { useGetRatingQuery, useSetRatingMutation } from '../../api/BaseApi';
 import { selectUser } from '../../redux/reducers/UserSlice';
 import Torrents from '../../components/movie/Torrents/Torrents';
+import useAuth from '../../hooks/useAuth';
 
 const MoviePage:FC = () => {
     const [watch, setWatch] = useState(false);
     const params = useParams();
+    const isAuth = useAuth();
     const { id: myUserId } = useSelector(selectUser);
     const { data: movieInformation } = useGetMovieInformationQuery(params.movieId);
-    const { data: rating, isLoading: isLoadingRating } = useGetRatingQuery(params.movieId);
+    const { data: rating, isLoading: isLoadingRating } = useGetRatingQuery(params.movieId, {
+        skip: !isAuth,
+    });
     const [setRating, { isLoading: isLoadingSetRating }] = useSetRatingMutation();
     const { data: trailers } = useGetMovieTrailersQuery(params.movieId);
     const { data: staff } = useGetMovieStaffQuery(params.movieId);
-    const [showTorrents, setShowTorrents] = useState(false);
     const dispatch = useDispatch();
     const myRate = (rating as any)?.find(({ user, rate }:{user: any, rate: number}) => user.id === myUserId)?.rate;
 
@@ -52,10 +55,6 @@ const MoviePage:FC = () => {
     ]));
     const director = staff?.find((item:any) => item?.professionKey === 'DIRECTOR');
     const actors = staff?.filter((item:any) => item?.professionKey === 'ACTOR').slice(0, 6);
-    console.log(rating);
-    useEffect(() => {
-        console.log(pageLoading);
-    }, [pageLoading]);
 
     useEffect(() => {
         dispatch(setPageLoading(true));
@@ -116,99 +115,100 @@ const MoviePage:FC = () => {
 
     return (
         <HeartLoading load={!pageLoading}>
-            <OpacityFade show={!pageLoading}>
-                <Section>
-                    <div
-                        className={styles.bgWrapper}
-                        style={{
-                            backgroundImage: `url(${movieInformation?.posterUrl})`,
-                        }}
-                    />
-                    {movieInformation && (
-                        <div className={styles.informationInner}>
-                            <div className={styles.poster}>
-                                <LoadBackground poster={movieInformation.data.posterUrl} />
+            <Section>
+                <div
+                    className={styles.bgWrapper}
+                    style={{
+                        backgroundImage: `url(${movieInformation?.posterUrl})`,
+                    }}
+                />
+                {movieInformation && (
+                    <div className={styles.informationInner}>
+                        <div className={styles.poster}>
+                            <LoadBackground poster={movieInformation.data.posterUrl} />
+                        </div>
+                        <div className={styles.movieInformation}>
+                            <div className={styles.movieTypeContainer}>
+                                <div className={styles.movieType}>
+                                    {
+                                        // @ts-ignore
+                                        movieTypes[movieInformation.data.type]
+                                    }
+                                </div>
+                                <div className={styles.movieGenres}>
+                                    {movieInformation.data.genres.map((item:any) => item.genre).join(', ')}
+                                </div>
                             </div>
-                            <div className={styles.movieInformation}>
-                                <div className={styles.movieTypeContainer}>
-                                    <div className={styles.movieType}>
-                                        {
-                                            // @ts-ignore
-                                            movieTypes[movieInformation.data.type]
-                                        }
+                            <div className={styles.row}>
+                                <div>
+                                    <div className={styles.movieTitle}>
+                                        <span className={styles.bold}>{movieInformation.data.nameRu}</span>
+                                        <span>
+                                            {' '}
+                                            (
+                                            {movieInformation.data.year}
+                                            )
+                                        </span>
                                     </div>
-                                    <div className={styles.movieGenres}>
-                                        {movieInformation.data.genres.map((item:any) => item.genre).join(', ')}
-                                    </div>
+                                    {attributes}
                                 </div>
-                                <div className={styles.row}>
-                                    <div>
-                                        <div className={styles.movieTitle}>
-                                            <span className={styles.bold}>{movieInformation.data.nameRu}</span>
-                                            <span>
-                                                {' '}
-                                                (
-                                                {movieInformation.data.year}
-                                                )
-                                            </span>
-                                        </div>
-                                        {attributes}
+                                <Display show={movieInformation?.rating.ratingImdb}>
+                                    <div className={styles.movieRatingContainer}>
+                                        <RatingDetails onChange={onChangeRatingHandler} defaultRating={(myRate as number)} rating={movieInformation.rating} />
                                     </div>
-                                    <Display show={movieInformation?.rating.ratingImdb}>
-                                        <div className={styles.movieRatingContainer}>
-                                            <RatingDetails onChange={onChangeRatingHandler} defaultRating={(myRate as number)} rating={movieInformation.rating} />
-                                        </div>
-                                    </Display>
-                                </div>
-                                <Display show={movieInformation.data.description}>
-                                    <div className={styles.movieDescription}>{movieInformation.data.description}</div>
                                 </Display>
-                                <div className={styles.movieButtons}>
-                                    <CircleButton
-                                        icon={favoriteIcon}
-                                        onClick={() => {
-                                            console.log('kke');
-                                        }}
-                                    />
-                                    <CircleButton
-                                        icon={shareIcon}
-                                        onClick={() => {
-                                            console.log('kke');
-                                        }}
-                                    />
-                                </div>
                             </div>
-                        </div>
-                    )}
-                    <Display show={actors?.length}>
-                        <div className={styles.actorsContainer}>
-                            <div className={styles.movieActors}>
-                                <Actors actors={actors} />
-                            </div>
-                            <span>
-                                <PrimaryButton
-                                    className={styles.btnWatch}
-                                    caption="Смотреть"
-                                    onClick={onBtnWatchClick}
+                            <Display show={movieInformation.data.description}>
+                                <div className={styles.movieDescription}>{movieInformation.data.description}</div>
+                            </Display>
+                            <div className={styles.movieButtons}>
+                                <CircleButton
+                                    icon={favoriteIcon}
+                                    onClick={() => {
+                                        console.log('kke');
+                                    }}
                                 />
-                                {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-                                <div
-                                    className={styles.btnTorrents}
-                                    onClick={() => setShowTorrents(true)}
-                                >
-                                    Скачать торрент
-                                </div>
-                            </span>
+                                <CircleButton
+                                    icon={shareIcon}
+                                    onClick={() => {
+                                        console.log('kke');
+                                    }}
+                                />
+                            </div>
                         </div>
-                    </Display>
-                    <div>
-                        {/* <Trailers trailers={trailers}/> */}
                     </div>
-                </Section>
-                <SimilarFilms movieId={params.movieId || ''} />
-                <Prequels movieId={params.movieId || ''} />
-                <Torrents movieInformation={movieInformation} />
-            </OpacityFade>
+                )}
+                <Display show={actors?.length}>
+                    <div className={styles.actorsContainer}>
+                        <div className={styles.movieActors}>
+                            <Actors actors={actors} />
+                        </div>
+                        <span>
+                            <PrimaryButton
+                                className={styles.btnWatch}
+                                caption="Смотреть"
+                                onClick={onBtnWatchClick}
+                            />
+                            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
+                            {/* <div */}
+                            {/*    className={styles.btnTorrents} */}
+                            {/*    onClick={() => setShowTorrents(true)} */}
+                            {/* > */}
+                            {/*    Скачать торрент */}
+                            {/* </div> */}
+                        </span>
+                    </div>
+                </Display>
+                <div>
+                    {/* <Trailers trailers={trailers}/> */}
+                </div>
+            </Section>
+            <SimilarFilms movieId={params.movieId || ''} />
+            <Prequels movieId={params.movieId || ''} />
+            <Torrents
+                filmId={movieInformation?.data.filmId}
+                request={`${movieInformation?.data.nameRu} ${movieInformation?.data.year}`}
+            />
             <Portal>
                 <OpacityFade show={watch}>
                     <WatchMovie movieId={parseInt((params.movieId as string), 10)} onClose={() => setWatch(false)} />

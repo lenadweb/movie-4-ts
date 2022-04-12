@@ -36,15 +36,14 @@ const StaticTable:FC<IStaticTable> = ({ columns, data, initialState = {} }) => {
                                     className={styles.cell}
                                 >
                                     <div className={styles.headSortCell}>
-                                        {column.render('Header')}
-                                        <div className={styles.arrowSort}>
-                                            {/* eslint-disable-next-line no-nested-ternary */}
-                                            {column.isSorted
-                                                ? column.isSortedDesc
-                                                    ? '↓'
-                                                    : '↑'
-                                                : ''}
-                                        </div>
+                                        <div className={styles.headCell}>{column.render('Header')}</div>
+                                        {column.isSorted
+                                            ? (
+                                                <div className={styles.arrowSort}>
+                                                    {column.isSortedDesc ? '↓' : '↑'}
+                                                </div>
+                                            )
+                                            : null}
                                     </div>
 
                                 </th>

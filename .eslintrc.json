@@ -27,6 +27,10 @@
     "rules": {
         "no-use-before-define": "off",
         "react/destructuring-assignment": "off",
+        "react/no-unstable-nested-components": [
+            "warn",
+            { "allowAsProps": true }
+        ],
         "import/no-cycle": "off",
         "@typescript-eslint/no-use-before-define": [
             "error"

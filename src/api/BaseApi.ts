@@ -59,7 +59,7 @@ export const baseApi = createApi({
         }),
         getTorrents: builder.mutation({
             query: (q: string) => ({
-                url: `torrents?q=${q}`,
+                url: `torrents/search?q=${q}`,
                 method: 'GET',
             }),
         }),
