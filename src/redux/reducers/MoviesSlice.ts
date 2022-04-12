@@ -78,5 +78,8 @@ export const selectTrailers = (state: IStore): any => state.movies.trailers;
 export const selectStaff = (state: IStore): any => state.movies.staff;
 export const selectPrequels = (state: IStore): any => state.movies.prequels;
 export const selectSimilar = (state: IStore): any => state.movies.similarFilms;
-export const selectPending = (endpoints: Array<string>) => (state: any): any => Object.values(state.kpApi.queries)
+export const selectPending = (endpoints: Array<string>) => (state: any): any => Object.values({
+    ...state.kpApi.queries,
+    ...state.baseApi.queries,
+})
     .some(({ status, endpointName }: any) => endpoints.includes(endpointName) && status === 'pending');

@@ -2,6 +2,7 @@ import { removeToken } from 'helpers/authHelper';
 import { FC, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { resetUser } from '../../redux/reducers/UserSlice';
 
 const LogoutPage: FC = () => {
     const dispatch = useDispatch();
@@ -9,6 +10,7 @@ const LogoutPage: FC = () => {
 
     const logoutHandler = useCallback(async () => {
         removeToken();
+        dispatch(resetUser());
         navigate('/');
     }, [dispatch]);
 

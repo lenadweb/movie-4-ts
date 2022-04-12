@@ -17,6 +17,7 @@ export const baseApi = createApi({
         baseUrl: API_URL,
         prepareHeaders,
     }),
+    tagTypes: ['rating', 'comments'],
     endpoints: (builder: any) => ({
         login: builder.mutation({
             query: (body: any) => ({
@@ -32,10 +33,44 @@ export const baseApi = createApi({
                 body,
             }),
         }),
+        getMe: builder.query({
+            query: (token: string) => ({
+                url: 'getMe',
+                method: 'GET',
+            }),
+        }),
+        getRating: builder.query({
+            query: (movieId: number) => ({
+                url: `getMovieRating?movieId=${movieId}`,
+                method: 'GET',
+            }),
+            providesTags: ['rating'],
+        }),
+        setRating: builder.mutation({
+            query: ({ movieId, rating }: { movieId: string, rating: number}) => ({
+                url: 'setMovieRating',
+                method: 'POST',
+                body: {
+                    movieId,
+                    rate: rating,
+                },
+            }),
+            invalidatesTags: ['rating'],
+        }),
+        getTorrents: builder.mutation({
+            query: (q: string) => ({
+                url: `torrents?q=${q}`,
+                method: 'GET',
+            }),
+        }),
     }),
 });
 
 export const {
     useLoginMutation,
     useRegistrationMutation,
+    useGetMeQuery,
+    useSetRatingMutation,
+    useGetRatingQuery,
+    useGetTorrentsMutation,
 } = baseApi;

@@ -1,0 +1,66 @@
+.wrapper table {
+    color: #ffffff;
+    font-size: 12px;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.wrapper thead tr {
+    color: #ffffff;
+    font-weight: bold;
+    text-align: left;
+    background: none;
+}
+
+
+.cell{
+    padding: 16px 48px 16px 12px;
+    vertical-align: center;
+}
+
+.wrapper table {
+    border-collapse: separate;
+}
+
+.cell {
+    /*border-bottom: 1px solid var(--border-grey-color);*/
+    position: relative;
+}
+
+
+
+.wrapper thead .cell:first-child {
+    border-top-left-radius: var(--secondary-border-radius);
+}
+
+.wrapper thead .cell:last-child {
+    border-top-right-radius: var(--secondary-border-radius);
+}
+
+.table tbody .row:last-child .cell:last-child {
+    border-bottom-right-radius: var(--secondary-border-radius);
+}
+
+.table tbody .row:last-child .cell:first-child {
+    border-bottom-left-radius: var(--secondary-border-radius);
+}
+
+.table tbody .row {
+    background: none;
+}
+
+.editableTextCell {
+    outline: none;
+    border: none;
+    background: none;
+    border-bottom: 1px solid var(--border-grey-color);
+}
+
+.headSortCell {
+    display: flex;
+    align-items: center;
+}
+
+.arrowSort {
+    margin-left: 10px;
+}

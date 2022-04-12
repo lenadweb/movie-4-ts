@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import cn from 'classnames';
-import { useLocation, useMatch, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useMatch, useNavigate } from 'react-router-dom';
 import { saveToken } from 'helpers/authHelper';
 import LoginForm from 'components/forms/AuthForms/LoginForm/LoginForm';
 import Diamonds from 'components/layout/Diamonds/Diamonds';
@@ -8,6 +8,7 @@ import styles from './LoginPage.module.css';
 import useAuth from '../../hooks/useAuth';
 import RegistrationForm from '../../components/forms/AuthForms/RegistrationForm/RegistrationForm';
 import { useLoginMutation, useRegistrationMutation } from '../../api/BaseApi';
+import TextButton from '../../components/forms/Buttons/TextButton/TextButton';
 
 const LoginPage: FC = () => {
     const [login, { isLoading: isLoginLoading, error: loginError }] = useLoginMutation();
@@ -54,11 +55,13 @@ const LoginPage: FC = () => {
                     [styles.formLoading]: isRegLoading || isLoginLoading,
                 })}
                 >
+                    <Link to="/">
+                        <TextButton className={styles.skipBtn} caption="Пропустить" />
+                    </Link>
                     {
                         location.pathname.includes('registration') ? <RegistrationForm onSubmit={onRegHandler} error={regError} />
                             : <LoginForm onSubmit={onLoginHandler} error={loginError} />
                     }
-
                 </div>
             </div>
             <div className={styles.diamonds}>

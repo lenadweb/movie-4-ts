@@ -62,4 +62,10 @@
     z-index: 1;
 }
 
+.skipBtn {
+    position: absolute;
+    right: 48px;
+    top: 32px;
+}
+
 

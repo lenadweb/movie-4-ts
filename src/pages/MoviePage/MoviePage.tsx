@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadBackground from 'components/utils/LoadBackground/LoadBackground';
 import HeartLoading from 'components/utils/HeartLoading/HeartLoading';
@@ -12,36 +12,39 @@ import PrimaryButton from 'components/forms/Buttons/PrimaryButton/PrimaryButton'
 import OpacityFade from 'components/utils/OpacityFade/OpacityFade';
 import RatingDetails from 'components/movie/RatingDetails/RatingDetails';
 import Section from 'components/utils/Section/Section';
-import HorizontalSlides from 'components/utils/HorizontalSlides/HorizontalSlides';
-import H from 'components/utils/H/H';
-import Margin from 'components/utils/Margin/Margin';
 import Display from 'components/utils/Display/Display';
-import MovieCompactItem from 'components/movie/MovieCompactItem/MovieCompactItem';
 import WatchMovie from 'components/movie/WatchMovie/WatchMovie';
 import Portal from 'components/utils/Portal/Portal';
-
 import shareIcon from 'assets/images/share.svg';
 import favoriteIcon from 'assets/images/favorite.svg';
 import {
     useGetMovieInformationQuery,
     useGetMovieStaffQuery,
-    useGetMovieTrailersQuery, useGetPrequelsQuery,
-    useGetSimilarMoviesQuery,
+    useGetMovieTrailersQuery,
 } from 'api/KpApi';
+import StaticTable from 'components/tables/StaticTable/StaticTable';
 import styles from './MoviePage.module.css';
-import { selectPageLoading, setPageLoading } from '../../redux/reducers/AppSlice';
-import { selectMovieInformation, selectPending, selectPrequels, selectSimilar, selectStaff } from '../../redux/reducers/MoviesSlice';
+import { setPageLoading } from '../../redux/reducers/AppSlice';
+import { selectPending } from '../../redux/reducers/MoviesSlice';
 import SimilarFilms from '../../components/movie/SimilarFilms/SimilarFilms';
 import Prequels from '../../components/movie/Prequels/Prequels';
+import { useGetRatingQuery, useSetRatingMutation } from '../../api/BaseApi';
+import { selectUser } from '../../redux/reducers/UserSlice';
+import Torrents from '../../components/movie/Torrents/Torrents';
 
 const MoviePage:FC = () => {
     const [watch, setWatch] = useState(false);
     const params = useParams();
+    const { id: myUserId } = useSelector(selectUser);
     const { data: movieInformation } = useGetMovieInformationQuery(params.movieId);
+    const { data: rating, isLoading: isLoadingRating } = useGetRatingQuery(params.movieId);
+    const [setRating, { isLoading: isLoadingSetRating }] = useSetRatingMutation();
     const { data: trailers } = useGetMovieTrailersQuery(params.movieId);
     const { data: staff } = useGetMovieStaffQuery(params.movieId);
     const [showTorrents, setShowTorrents] = useState(false);
     const dispatch = useDispatch();
+    const myRate = (rating as any)?.find(({ user, rate }:{user: any, rate: number}) => user.id === myUserId)?.rate;
+
     const pageLoading = useSelector(selectPending([
         'getMovieStaff',
         'getMovieInformation',
@@ -49,7 +52,7 @@ const MoviePage:FC = () => {
     ]));
     const director = staff?.find((item:any) => item?.professionKey === 'DIRECTOR');
     const actors = staff?.filter((item:any) => item?.professionKey === 'ACTOR').slice(0, 6);
-
+    console.log(rating);
     useEffect(() => {
         console.log(pageLoading);
     }, [pageLoading]);
@@ -68,8 +71,6 @@ const MoviePage:FC = () => {
             win.focus();
         } else setWatch(true);
     };
-
-    console.log(movieInformation);
 
     const attributes = [
         director
@@ -105,6 +106,13 @@ const MoviePage:FC = () => {
                 />
             ) : null,
     ];
+
+    const onChangeRatingHandler = async (rating: number): Promise<void> => {
+        const data = await setRating({
+            movieId: params.movieId,
+            rating,
+        });
+    };
 
     return (
         <HeartLoading load={!pageLoading}>
@@ -148,7 +156,7 @@ const MoviePage:FC = () => {
                                     </div>
                                     <Display show={movieInformation?.rating.ratingImdb}>
                                         <div className={styles.movieRatingContainer}>
-                                            <RatingDetails rating={movieInformation.rating} />
+                                            <RatingDetails onChange={onChangeRatingHandler} defaultRating={(myRate as number)} rating={movieInformation.rating} />
                                         </div>
                                     </Display>
                                 </div>
@@ -199,6 +207,7 @@ const MoviePage:FC = () => {
                 </Section>
                 <SimilarFilms movieId={params.movieId || ''} />
                 <Prequels movieId={params.movieId || ''} />
+                <Torrents movieInformation={movieInformation} />
             </OpacityFade>
             <Portal>
                 <OpacityFade show={watch}>

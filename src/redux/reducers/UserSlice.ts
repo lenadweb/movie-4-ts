@@ -23,6 +23,13 @@ const UserSlice = createSlice({
             state.email = action.payload.email;
             state.id = action.payload.id;
         },
+        resetUser(state: IUserState) {
+            state.username = null;
+            state.role = null;
+            state.token = null;
+            state.email = null;
+            state.id = null;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -32,6 +39,15 @@ const UserSlice = createSlice({
                     if (payload.token) {
                         state.token = payload.token;
                     }
+                },
+            )
+            .addMatcher(
+                baseApi.endpoints.getMe.matchFulfilled,
+                (state: IUserState, { payload }: { payload: any }) => {
+                    state.email = payload.email;
+                    state.id = payload.id;
+                    state.role = payload.role;
+                    state.username = payload.name;
                 },
             )
             .addMatcher(
@@ -48,9 +64,11 @@ const UserSlice = createSlice({
 export const {
     logout,
     setPersonalInfo,
+    resetUser,
 } = UserSlice.actions;
 export default UserSlice.reducer;
 export const selectAuth = (state: IStore): boolean => !!state.user.token;
+export const selectToken = (state: IStore): string | null => state.user.token;
 export const selectUser = (state: IStore): IUserState => state.user;
 //
 // .addMatcher(
