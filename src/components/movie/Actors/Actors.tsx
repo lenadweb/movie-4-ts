@@ -16,7 +16,7 @@ const Actors:FC<{actors: any}> = ({ actors }) => (
                         />
                         <div className={styles.caption}>
                             {
-                                item.nameRu.split(' ').map((item: any) => <div key={item.staffId}>{item}</div>)
+                                item.nameRu.split(' ').map((item: any) => <div key={item}>{item}</div>)
                             }
                         </div>
                     </Link>

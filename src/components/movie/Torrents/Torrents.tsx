@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import prettyBytes from 'pretty-bytes';
 import Margin from 'components/utils/Margin/Margin';
 import H from 'components/utils/H/H';
@@ -12,6 +12,7 @@ import styles from './Torrents.module.css';
 import HeartLoadingSmall from '../../utils/HeartLoading/HeartLoadingSmall';
 import { downloadFile } from '../../../helpers/commonHelper';
 import Icon from '../../media/Icon/Icon';
+import LoadingSpinner from '../../utils/LoadingSpinner/LoadingSpinner';
 
 interface ITorrents {
     filmId: number;
@@ -20,8 +21,10 @@ interface ITorrents {
 
 const Torrents:FC<ITorrents> = ({ filmId, request }) => {
     const [getTorrents, { isLoading, data }] = useGetTorrentsMutation();
+    const [torrentIndexLoading, setTorrentIndexLoading] = useState<number | null>(null);
 
-    const onDownloadHandler = async (id:number, title:string):Promise<void> => {
+    const onDownloadHandler = async (id:number, title:string, index: number):Promise<void> => {
+        setTorrentIndexLoading(index);
         const response = await axios({
             method: 'GET',
             url: `${API_URL}torrents/download?id=${id}&filename=${filmId}.torrent`,
@@ -29,12 +32,8 @@ const Torrents:FC<ITorrents> = ({ filmId, request }) => {
         });
         const urlDownload = window.URL.createObjectURL(new Blob([response.data]));
         downloadFile(urlDownload, `${title}.torrent`);
+        setTorrentIndexLoading(null);
     };
-
-    useEffect(() => {
-        // if (filmId) getTorrents(request);
-        console.log(filmId);
-    }, [filmId]);
 
     const commonValuesMl = useMemo(() => (data as Array<any>)?.map(({ title, seeds, leeches, size }:any) => ({
         col1: title,
@@ -73,16 +72,26 @@ const Torrents:FC<ITorrents> = ({ filmId, request }) => {
         {
             Header: 'Скачать',
             accessor: 'col6' as const,
-            Cell: ({ value, row }:any) => (
-                <Icon
-                    src={downloadIcon}
-                    className={styles.downloadBtn}
-                    size="xs"
-                    onClick={() => onDownloadHandler((data as any[])?.[row.index]?.id, (data as any[])?.[row.index]?.title)}
-                />
-            ),
+            Cell: ({ value, row, ...rest }:any) => {
+                console.log({ value, row, ...rest });
+                return (
+                    <LoadingSpinner loaded={!(row.index === torrentIndexLoading)}>
+                        <Icon
+                            src={downloadIcon}
+                            className={styles.downloadBtn}
+                            size="xs"
+                            onClick={() => onDownloadHandler((data as any[])?.[row.index]?.id, (data as any[])?.[row.index]?.title, row.index)}
+                        />
+                    </LoadingSpinner>
+                );
+            },
         },
-    ], [data]);
+    ], [data, torrentIndexLoading]);
+
+    useEffect(() => {
+        if (filmId) getTorrents(request);
+    }, [filmId]);
+
     return (
         <Section className={styles.wrapper}>
             <div className={styles.scroll}>

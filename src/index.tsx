@@ -11,13 +11,11 @@ import 'assets/styles/variables.css';
 
 const root = ReactDOM.createRoot((document.getElementById('root') as Element));
 const element = (
-    <React.StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
-                <AppRouter />
-            </BrowserRouter>
-        </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+        <BrowserRouter>
+            <AppRouter />
+        </BrowserRouter>
+    </Provider>
 );
 root.render(element);
 

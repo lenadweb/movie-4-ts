@@ -48,17 +48,18 @@ const MoviePage:FC = () => {
     const dispatch = useDispatch();
     const myRate = (rating as any)?.find(({ user, rate }:{user: any, rate: number}) => user.id === myUserId)?.rate;
 
+    useEffect(() => {
+        console.log(movieInformation);
+    }, [movieInformation]);
+
     const pageLoading = useSelector(selectPending([
         'getMovieStaff',
         'getMovieInformation',
         'getTrailers',
     ]));
+
     const director = staff?.find((item:any) => item?.professionKey === 'DIRECTOR');
     const actors = staff?.filter((item:any) => item?.professionKey === 'ACTOR').slice(0, 6);
-
-    useEffect(() => {
-        dispatch(setPageLoading(true));
-    }, [params.movieId]);
 
     // useEffect(() => {
     //     movieInformation?.data && dispatch(setTitle(movieInformation.nameRu));
@@ -214,11 +215,6 @@ const MoviePage:FC = () => {
                     <WatchMovie movieId={parseInt((params.movieId as string), 10)} onClose={() => setWatch(false)} />
                 </OpacityFade>
             </Portal>
-            {/* <Portal> */}
-            {/*    <OpacityFade show={showTorrents}> */}
-            {/*        <Torrents movieInformation={movieInformation} onClose={() => setShowTorrents(false)} /> */}
-            {/*    </OpacityFade> */}
-            {/* </Portal> */}
         </HeartLoading>
     );
 };

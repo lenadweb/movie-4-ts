@@ -5,6 +5,10 @@ import RandomMovies from '../pages/RandomMovies/RandomMovies';
 import MoviePage from '../pages/MoviePage/MoviePage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import LogoutPage from '../pages/LogoutPage/LogoutPage';
+// const Layout = React.lazy(() => import("../components/layout/Layout/Layout"));
+// const RandomMovies = React.lazy(() => import("../pages/RandomMovies/RandomMovies"));
+// const MoviePage = React.lazy(() => import('../pages/MoviePage/MoviePage'));
+// const LoginPage = React.lazy(() => import(../pages/LoginPage/LoginPage"));
 
 export const appRoutes: Array<IRoute> = [
     {

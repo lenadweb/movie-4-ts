@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import HorizontalSlides from '../../utils/HorizontalSlides/HorizontalSlides';
 import { selectSimilar } from '../../../redux/reducers/MoviesSlice';

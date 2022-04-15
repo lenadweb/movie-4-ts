@@ -22,9 +22,7 @@ const Layout: FC = () => {
                     <div className={styles.mainContent}>
                         <Header />
                         <div className={styles.pageWrapper}>
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <Outlet />
-                            </Suspense>
+                            <Outlet />
                         </div>
                     </div>
                 </div>

@@ -27,6 +27,7 @@ const RatingDetails:FC<IRatingDetails> = ({ rating, onChange, defaultRating = 0 
     for (let i = 0; i < 10; i++) {
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/control-has-associated-label,jsx-a11y/interactive-supports-focus
         stars.push(<div
+            key={i}
             className={cn(styles.star, {
                 [styles.starActive]: starNumber - 1 >= i,
             })}
