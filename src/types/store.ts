@@ -1,4 +1,6 @@
 import { Api } from '@reduxjs/toolkit/dist/query';
+import { IToastSlice, TToastItem } from 'redux/reducers/ToastsSlice';
+import { IMainMovieInfo, IMovieInformation, IMovieListItem, IStaffItem, ITorrentItem } from './movies';
 
 export interface IAppSlice {
     pageLoading: boolean;
@@ -13,18 +15,18 @@ export interface IUserState {
 }
 
 export interface IMoviesSlice {
-    countPage: number | null,
-    movieInformation: any,
-    listFilms: Array<any>,
+    countPage: number,
+    movieInformation: IMovieInformation | null,
+    listFilms: IMovieListItem[],
     loadingStaffInformation: boolean,
-    staff: any,
+    staff: IStaffItem[],
     loadingTrailers: boolean,
     trailers: any,
     loadingSimilarFilms: boolean,
-    similarFilms: any,
-    prequels: any,
+    similarFilms: IMainMovieInfo[],
+    prequels: IMainMovieInfo[],
     loadingPrequels: boolean,
-    torrents: Array<any>,
+    torrents: ITorrentItem[],
     loadingTorrents: boolean,
 }
 
@@ -34,4 +36,5 @@ export interface IStore {
     app: IAppSlice;
     user: IUserState;
     movies: IMoviesSlice;
+    toasts: IToastSlice
 }

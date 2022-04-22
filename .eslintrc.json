@@ -26,6 +26,7 @@
     ],
     "rules": {
         "no-use-before-define": "off",
+        "camelcase": "off",
         "react/destructuring-assignment": "off",
         "react/no-unstable-nested-components": [
             "warn",

@@ -44,7 +44,7 @@
     margin-top: 24px;
     flex: 1;
     padding-right: 24px;
-    height: calc(100vh - 140px);
+    max-height: calc(100vh - 140px);
 }
 
 @media(max-width: 768px) {

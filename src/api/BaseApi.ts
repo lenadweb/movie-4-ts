@@ -1,7 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { store } from 'redux/store/store';
+import { IGetMovieState, IGetMyRatesMovies, IGetWishMovies } from 'types/api';
+import { IMovieInformation } from '../types/movies';
 
 export const API_URL = 'https://devlo.ru/api/';
+export const API_URL_TEST = 'http://localhost:8000/api/';
 
 const prepareHeaders = (headers: any): any => {
     const { token } = store.getState().user;
@@ -17,51 +20,79 @@ export const baseApi = createApi({
         baseUrl: API_URL,
         prepareHeaders,
     }),
-    tagTypes: ['rating', 'comments'],
-    endpoints: (builder: any) => ({
+    tagTypes: ['rating', 'comments', 'movieState'],
+    endpoints: (builder) => ({
         login: builder.mutation({
             query: (body: any) => ({
-                url: 'login',
+                url: 'auth/login',
                 method: 'POST',
                 body,
             }),
         }),
         registration: builder.mutation({
             query: (body: any) => ({
-                url: 'registration',
+                url: 'auth/registration',
                 method: 'POST',
                 body,
             }),
         }),
         getMe: builder.query({
             query: (token: string) => ({
-                url: 'getMe',
+                url: 'auth/getMe',
                 method: 'GET',
             }),
         }),
         getRating: builder.query({
             query: (movieId: number) => ({
-                url: `getMovieRating?movieId=${movieId}`,
+                url: `movie/getRating?movieId=${movieId}`,
                 method: 'GET',
             }),
             providesTags: ['rating'],
         }),
         setRating: builder.mutation({
-            query: ({ movieId, rating }: { movieId: string, rating: number}) => ({
-                url: 'setMovieRating',
+            query: ({ movieId, rating, movieContent }: { movieId: string, rating: number, movieContent: any}) => ({
+                url: 'movie/setRating',
                 method: 'POST',
                 body: {
                     movieId,
                     rate: rating,
+                    movieContent,
                 },
             }),
-            invalidatesTags: ['rating'],
+            invalidatesTags: ['rating', 'movieState'],
         }),
         getTorrents: builder.mutation({
             query: (q: string) => ({
                 url: `torrents/search?q=${q}`,
                 method: 'GET',
             }),
+        }),
+        getMyRatesMovies: builder.query<IGetMyRatesMovies[], string>({
+            query: (movieId) => ({
+                url: 'movie/getMyRates',
+                method: 'GET',
+            }),
+        }),
+        getWishMovies: builder.query<IGetWishMovies[], string>({
+            query: (movieId) => ({
+                url: 'movie/getWishMovies',
+                method: 'GET',
+            }),
+        }),
+        getMovieState: builder.query<IGetMovieState, string>({
+            query: (movieId) => ({
+                url: `movie/getMovie?movieId=${movieId}`,
+                method: 'GET',
+            }),
+            providesTags: ['movieState'],
+        }),
+        setWishMovie: builder.mutation<IGetMovieState, any>({
+            query: ({ movieId, value, movieContent }) => ({
+                url: 'movie/setWishMovie',
+                method: 'POST',
+                body: { movieId, value, movieContent },
+            }),
+            invalidatesTags: ['movieState'],
         }),
     }),
 });
@@ -73,4 +104,8 @@ export const {
     useSetRatingMutation,
     useGetRatingQuery,
     useGetTorrentsMutation,
+    useGetMyRatesMoviesQuery,
+    useGetMovieStateQuery,
+    useSetWishMovieMutation,
+    useGetWishMoviesQuery,
 } = baseApi;

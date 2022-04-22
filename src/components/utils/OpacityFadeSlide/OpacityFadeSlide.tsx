@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import styles from 'common/components/utils/OpacityFadeSlide/OpacityFadeSlide.module.css';
+import styles from './OpacityFadeSlide.module.css';
 
 export interface IOpacityFadeSlide {
     show?: boolean;

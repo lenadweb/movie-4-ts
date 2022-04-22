@@ -1,13 +1,16 @@
 import React from 'react';
 import { IRoute } from 'types/routes';
+import WishMovies from 'pages/WishMovies/WishMovies';
 import Layout from '../components/layout/Layout/Layout';
 import RandomMovies from '../pages/RandomMovies/RandomMovies';
 import MoviePage from '../pages/MoviePage/MoviePage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import LogoutPage from '../pages/LogoutPage/LogoutPage';
+import MyRatesMovies from '../pages/MyRatesMovies/MyRatesMovies';
+import SearchPage from '../pages/SearchPage/SearchPage';
 // const Layout = React.lazy(() => import("../components/layout/Layout/Layout"));
-// const RandomMovies = React.lazy(() => import("../pages/RandomMovies/RandomMovies"));
-// const MoviePage = React.lazy(() => import('../pages/MoviePage/MoviePage'));
+// const MyRatesMovies = React.lazy(() => import("../pages/MyRatesMovies/MyRatesMovies"));
+// const WishMovies = React.lazy(() => import('../pages/WishMovies/WishMovies'));
 // const LoginPage = React.lazy(() => import(../pages/LoginPage/LoginPage"));
 
 export const appRoutes: Array<IRoute> = [
@@ -62,14 +65,27 @@ export const appRoutes: Array<IRoute> = [
             {
                 path: '/search/',
                 requireAuth: false,
+                element: <SearchPage />,
                 name: 'Поиск',
                 children: [
                     {
                         path: ':q',
-                        element: '',
+                        element: <SearchPage />,
                         name: '',
                     },
                 ],
+            },
+            {
+                path: 'rates',
+                requireAuth: true,
+                element: <MyRatesMovies />,
+                name: 'Оцененные фильмы',
+            },
+            {
+                path: 'wishes',
+                requireAuth: true,
+                element: <WishMovies />,
+                name: 'Посмотреть позже',
             },
             {
                 path: 'top',

@@ -1,0 +1,32 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(400px, 1fr) );
+    grid-gap: 24px 32px;
+    padding-left: 4px;
+    height: 100%;
+}
+
+.star {
+    margin-left: 3px;
+    width: 16px;
+    height: 16px;
+    background-size: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("./../../assets/images/heart-svg-animation-filled.svg");
+}
+
+.movieTitle {
+    font-size: 1.1rem;
+}
+
+.movieImage {
+}
+
+.movieGenres {
+    margin-top: 16px;
+}
+
+.movieInformation {
+    margin-left: 16px;
+}

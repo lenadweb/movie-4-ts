@@ -11,8 +11,12 @@
     justify-content: center;
 }
 
-.star {
+.starItemWrapper {
     margin-left: 8px;
+}
+
+.star {
+
     width: 16px;
     height: 16px;
     cursor: pointer;
@@ -26,7 +30,7 @@
     background-image: url("./../../../assets/images/heart-svg-animation-filled.svg");
 }
 
-.star:first-child {
+.starItemWrapper:first-child {
     margin: 0;
 }
 

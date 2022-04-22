@@ -17,47 +17,43 @@ import WatchMovie from 'components/movie/WatchMovie/WatchMovie';
 import Portal from 'components/utils/Portal/Portal';
 import shareIcon from 'assets/images/share.svg';
 import favoriteIcon from 'assets/images/favorite.svg';
+import spinnerIcon from 'assets/images/spinner.svg';
 import {
     useGetMovieInformationQuery,
     useGetMovieStaffQuery,
     useGetMovieTrailersQuery,
 } from 'api/KpApi';
-import StaticTable from 'components/tables/StaticTable/StaticTable';
+import cn from 'classnames';
 import styles from './MoviePage.module.css';
-import { setPageLoading } from '../../redux/reducers/AppSlice';
-import { selectPending } from '../../redux/reducers/MoviesSlice';
 import SimilarFilms from '../../components/movie/SimilarFilms/SimilarFilms';
 import Prequels from '../../components/movie/Prequels/Prequels';
-import { useGetRatingQuery, useSetRatingMutation } from '../../api/BaseApi';
+import { useGetMovieStateQuery, useSetRatingMutation, useSetWishMovieMutation } from '../../api/BaseApi';
 import { selectUser } from '../../redux/reducers/UserSlice';
 import Torrents from '../../components/movie/Torrents/Torrents';
 import useAuth from '../../hooks/useAuth';
+import TextButton from '../../components/forms/Buttons/TextButton/TextButton';
+import HoverToolTip from '../../components/utils/HoverToolTip/HoverToolTip';
+import LoadingSpinner from '../../components/utils/LoadingSpinner/LoadingSpinner';
+import useToast from '../../hooks/useToast';
+import { requireAuth } from '../../helpers/toastHelper';
 
 const MoviePage:FC = () => {
     const [watch, setWatch] = useState(false);
     const params = useParams();
     const isAuth = useAuth();
     const { id: myUserId } = useSelector(selectUser);
-    const { data: movieInformation } = useGetMovieInformationQuery(params.movieId);
-    const { data: rating, isLoading: isLoadingRating } = useGetRatingQuery(params.movieId, {
+    const { data: movieInformation, isLoading: isLoadingMovieInformation } = useGetMovieInformationQuery(params.movieId);
+    const [setRating, { isLoading: isLoadingSetRating }] = useSetRatingMutation();
+    const [setWishMovie, { isLoading: isLoadingWishToggle }] = useSetWishMovieMutation();
+    const { data: trailers } = useGetMovieTrailersQuery(params.movieId);
+    const { data: staff, isLoading: isLoadingStaff } = useGetMovieStaffQuery(params.movieId);
+    const { data: movieUserState, isLoading: isLoadingMovieUserState } = useGetMovieStateQuery(params.movieId || '', {
         skip: !isAuth,
     });
-    const [setRating, { isLoading: isLoadingSetRating }] = useSetRatingMutation();
-    const { data: trailers } = useGetMovieTrailersQuery(params.movieId);
-    const { data: staff } = useGetMovieStaffQuery(params.movieId);
-    const dispatch = useDispatch();
-    const myRate = (rating as any)?.find(({ user, rate }:{user: any, rate: number}) => user.id === myUserId)?.rate;
-
-    useEffect(() => {
-        console.log(movieInformation);
-    }, [movieInformation]);
-
-    const pageLoading = useSelector(selectPending([
-        'getMovieStaff',
-        'getMovieInformation',
-        'getTrailers',
-    ]));
-
+    const rating = movieUserState?.rates || [];
+    const myRate = rating.find(({ user }) => user.id === myUserId)?.rate || 0;
+    // eslint-disable-next-line no-debugger
+    const pageLoading = isLoadingMovieInformation || isLoadingStaff;
     const director = staff?.find((item:any) => item?.professionKey === 'DIRECTOR');
     const actors = staff?.filter((item:any) => item?.professionKey === 'ACTOR').slice(0, 6);
 
@@ -72,46 +68,47 @@ const MoviePage:FC = () => {
         } else setWatch(true);
     };
 
+    const onWishToggle = ():void => {
+        if ((!isLoadingMovieUserState && !isLoadingWishToggle)) {
+            setWishMovie({
+                movieId: movieInformation?.data.filmId,
+                value: !movieUserState?.isWish,
+                movieContent: movieInformation,
+            });
+        }
+    };
+
     const attributes = [
-        director
-            ? (
-                <Attribute
-                    key={1}
-                    caption="Режиссер"
-                    content={<Link to={`/staff/${director.staffId}`}>{director.nameRu}</Link>}
-                />
-            ) : null,
-        movieInformation?.data?.countries?.length
-            ? (
-                <Attribute
-                    key={2}
-                    caption={movieInformation.data?.countries.length > 1 ? 'Страны' : 'Страна'}
-                    content={movieInformation.data?.countries.map(({ country }: any) => country).join(', ')}
-                />
-            ) : null,
-        movieInformation?.budget?.budget
-            ? (
-                <Attribute
-                    key={3}
-                    caption="Бюджет"
-                    content={`$${formatNumberThousand(parseInt(movieInformation.budget.budget.replace(/\D+/g, ''), 10))}`}
-                />
-            ) : null,
-        movieInformation?.budget?.grossWorld
-            ? (
-                <Attribute
-                    key={4}
-                    caption="Сборы"
-                    content={`$${formatNumberThousand(parseInt(movieInformation.budget.grossWorld, 10))}`}
-                />
-            ) : null,
+        {
+            caption: 'Режиссер',
+            content: <Link to={`/staff/${director?.staffId}`}>{director?.nameRu}</Link>,
+            visibility: !!director,
+        },
+        {
+            caption: movieInformation?.data?.countries.length > 1 ? 'Страны' : 'Страна',
+            content: movieInformation?.data?.countries.map(({ country }: any) => country).join(', '),
+            visibility: movieInformation?.data?.countries?.length,
+        },
+        {
+            caption: 'Бюджет',
+            content: `$${formatNumberThousand(parseInt(movieInformation?.budget?.budget?.replace(/\D+/g, ''), 10))}`,
+            visibility: movieInformation?.budget?.budget,
+        },
+        {
+            caption: 'Сборы',
+            content: `$${formatNumberThousand(parseInt(movieInformation?.budget?.grossWorld, 10))}`,
+            visibility: movieInformation?.budget?.grossWorld,
+        },
     ];
 
     const onChangeRatingHandler = async (rating: number): Promise<void> => {
-        const data = await setRating({
-            movieId: params.movieId,
-            rating,
-        });
+        if (params.movieId && isAuth) {
+            await setRating({
+                movieId: params.movieId,
+                rating,
+                movieContent: movieInformation,
+            });
+        }
     };
 
     return (
@@ -151,11 +148,18 @@ const MoviePage:FC = () => {
                                             )
                                         </span>
                                     </div>
-                                    {attributes}
+                                    {
+                                        attributes.map(({ caption, content, visibility }) => (visibility ? <Attribute caption={caption} content={content} /> : null))
+                                    }
                                 </div>
                                 <Display show={movieInformation?.rating.ratingImdb}>
                                     <div className={styles.movieRatingContainer}>
-                                        <RatingDetails onChange={onChangeRatingHandler} defaultRating={(myRate as number)} rating={movieInformation.rating} />
+                                        <RatingDetails
+                                            onChange={onChangeRatingHandler}
+                                            loading={isLoadingMovieUserState}
+                                            defaultRating={myRate}
+                                            rating={movieInformation.rating}
+                                        />
                                     </div>
                                 </Display>
                             </div>
@@ -163,18 +167,25 @@ const MoviePage:FC = () => {
                                 <div className={styles.movieDescription}>{movieInformation.data.description}</div>
                             </Display>
                             <div className={styles.movieButtons}>
-                                <CircleButton
-                                    icon={favoriteIcon}
-                                    onClick={() => {
-                                        console.log('kke');
-                                    }}
-                                />
-                                <CircleButton
-                                    icon={shareIcon}
-                                    onClick={() => {
-                                        console.log('kke');
-                                    }}
-                                />
+                                <HoverToolTip content="Посмотреть позже">
+                                    <CircleButton
+                                        icon={(!isLoadingMovieUserState && !isLoadingWishToggle) ? favoriteIcon : spinnerIcon}
+                                        className={cn({
+                                            [styles.activeCircleButton]: movieUserState?.isWish,
+                                        })}
+                                        onClick={requireAuth(onWishToggle)}
+                                    />
+                                </HoverToolTip>
+
+                                <HoverToolTip content="Поделиться">
+                                    <CircleButton
+                                        icon={shareIcon}
+                                        onClick={() => {
+                                            console.log('kke');
+                                        }}
+                                    />
+                                </HoverToolTip>
+
                             </div>
                         </div>
                     </div>
@@ -184,20 +195,19 @@ const MoviePage:FC = () => {
                         <div className={styles.movieActors}>
                             <Actors actors={actors} />
                         </div>
-                        <span>
+                        <div className={styles.btnContainer}>
                             <PrimaryButton
                                 className={styles.btnWatch}
                                 caption="Смотреть"
                                 onClick={onBtnWatchClick}
                             />
-                            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-                            {/* <div */}
-                            {/*    className={styles.btnTorrents} */}
-                            {/*    onClick={() => setShowTorrents(true)} */}
-                            {/* > */}
-                            {/*    Скачать торрент */}
-                            {/* </div> */}
-                        </span>
+                            <a href="#torrents">
+                                <TextButton
+                                    caption="Скачать торрент"
+                                    className={styles.btnTorrents}
+                                />
+                            </a>
+                        </div>
                     </div>
                 </Display>
                 <div>
@@ -206,10 +216,12 @@ const MoviePage:FC = () => {
             </Section>
             <SimilarFilms movieId={params.movieId || ''} />
             <Prequels movieId={params.movieId || ''} />
-            <Torrents
-                filmId={movieInformation?.data.filmId}
-                request={`${movieInformation?.data.nameRu} ${movieInformation?.data.year}`}
-            />
+            <div id="torrents">
+                <Torrents
+                    filmId={movieInformation?.data.filmId}
+                    request={`${movieInformation?.data.nameRu} ${movieInformation?.data.year}`}
+                />
+            </div>
             <Portal>
                 <OpacityFade show={watch}>
                     <WatchMovie movieId={parseInt((params.movieId as string), 10)} onClose={() => setWatch(false)} />

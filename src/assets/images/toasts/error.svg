@@ -1,0 +1,27 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="512"
+        height="512"
+        enableBackground="new 0 0 512 512"
+        viewBox="0 0 24 24"
+>
+    <g fill="#e9594c">
+        <path
+                xmlns="http://www.w3.org/2000/svg"
+                d="M12 1a11 11 0 1011 11A11.013 11.013 0 0012 1zm0 20a9 9 0 119-9 9.011 9.011 0 01-9 9z"
+                data-original="#000000"
+        ></path>
+        <path
+                xmlns="http://www.w3.org/2000/svg"
+                d="M12 6a1 1 0 00-1 1v7a1 1 0 002 0V7a1 1 0 00-1-1z"
+                data-original="#000000"
+        ></path>
+        <circle
+                xmlns="http://www.w3.org/2000/svg"
+                cx="12"
+                cy="17"
+                r="1"
+                data-original="#000000"
+        ></circle>
+    </g>
+</svg>

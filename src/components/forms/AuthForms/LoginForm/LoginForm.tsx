@@ -10,9 +10,9 @@ import { Link } from 'react-router-dom';
 import styles from '../AuthForms.module.css';
 import TextButton from '../../Buttons/TextButton/TextButton';
 import BasicButton from '../../Buttons/BasicButton/BasicButton';
-import CheckInput from '../../CheckInput/CheckInput';
-import TextInput from '../../TextInput/TextInput';
-import InputLabel from '../../InputLabel/InputLabel';
+import CheckInput from '../../../inputs/CheckInput/CheckInput';
+import TextInput from '../../../inputs/TextInput/TextInput';
+import InputLabel from '../../../inputs/InputLabel/InputLabel';
 import InlineAlert from '../../../type/InputAlert/InlineAlert';
 
 interface ILoginForm {

@@ -7,29 +7,25 @@ import Header from 'components/layout/Header/Header';
 import { selectToken } from 'redux/reducers/UserSlice';
 import styles from './Layout.module.css';
 import { useGetMeQuery } from '../../../api/BaseApi';
+import Diamonds from '../Diamonds/Diamonds';
+import SmoothScroll from '../../utils/SmoothScroll/SmoothScroll';
 
-const Layout: FC = () => {
-    const token = useSelector(selectToken);
-    useGetMeQuery(token, {
-        skip: !token,
-    });
-
-    return (
-        <div className={cn(styles.app)}>
-            <div className={styles.container}>
-                <div className={styles.content}>
-                    <Sidebar />
-                    <div className={styles.mainContent}>
-                        <Header />
-                        <div className={styles.pageWrapper}>
-                            <Outlet />
-                        </div>
+const Layout: FC = () => (
+    <div className={cn(styles.app)}>
+        <div className={styles.container}>
+            <div className={styles.content}>
+                <Sidebar />
+                <div className={styles.mainContent}>
+                    <Header />
+                    <div className={styles.pageWrapper}>
+                        <Outlet />
                     </div>
                 </div>
             </div>
-            {/* <Diamonds/> */}
         </div>
-    );
-};
+        <Diamonds />
+        <SmoothScroll />
+    </div>
+);
 
 export default Layout;

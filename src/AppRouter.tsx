@@ -3,20 +3,19 @@ import RouterOpacityFade from 'components/utils/RouterOpacityFade/RouterOpacityF
 import useAuth from 'hooks/useAuth';
 import React, { FC, Suspense, useCallback, useEffect } from 'react';
 import { BrowserRouter, matchRoutes, Route, Routes, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { appRoutes } from './constants/routes';
 import { IRoute } from './types/routes';
+import { selectToken } from './redux/reducers/UserSlice';
+import { useGetMeQuery } from './api/BaseApi';
 
 const AppRouter: FC = () => {
     const location = useLocation();
     const isAuth = useAuth();
-
-    useEffect(() => {
-        // if (filmId) getTorrents(request);
-        console.log('mount');
-        return () => {
-            console.log('unmount');
-        };
-    }, []);
+    const token = useSelector(selectToken);
+    useGetMeQuery(token || '', {
+        skip: !token,
+    });
 
     const renderRoutes = useCallback((routes) => routes.length
         && routes.map(({ path, requireAuth, element, children }: IRoute) => (

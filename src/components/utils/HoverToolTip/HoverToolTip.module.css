@@ -1,0 +1,13 @@
+.wrapper {
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 1000;
+    padding: 4px 8px;
+    font-size: 11px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.78);
+    border-radius: var(--secondary-border-radius);
+}

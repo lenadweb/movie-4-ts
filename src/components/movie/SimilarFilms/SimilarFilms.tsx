@@ -10,10 +10,12 @@ import Margin from '../../utils/Margin/Margin';
 import MovieCompactItem from '../MovieCompactItem/MovieCompactItem';
 
 const SimilarFilms:FC<{movieId: string}> = ({ movieId }) => {
-    useGetSimilarMoviesQuery(movieId);
-    const similarFilms = useSelector(selectSimilar);
+    const { data: similarFilms, ...rest } = useGetSimilarMoviesQuery(movieId);
+    console.log(movieId);
+    console.log(similarFilms);
+    console.log(rest);
 
-    const slides = similarFilms && similarFilms?.filter((item:any) => item?.nameRu).map((item:any, index: number) => (
+    const slides = similarFilms && similarFilms?.items?.filter((item:any) => item?.nameRu).map((item:any, index: number) => (
         <MovieCompactItem
             delay={index * 30}
             key={item.filmId}
@@ -24,7 +26,7 @@ const SimilarFilms:FC<{movieId: string}> = ({ movieId }) => {
     ));
 
     return (
-        <Display show={!!similarFilms?.length}>
+        <Display show={!!similarFilms?.items?.length}>
             <Section style={{ marginTop: '24px' }}>
                 <Margin margin="0 0 16px 0">
                     <H size="m">Похожие фильмы</H>

@@ -3,16 +3,24 @@ import cn from 'classnames';
 import { formatNumberThousand } from 'helpers/formatHelper';
 import Display from 'components/utils/Display/Display';
 import styles from './RatingDetails.module.css';
+import useAuth from '../../../hooks/useAuth';
+import useToast from '../../../hooks/useToast';
+import { requireAuth } from '../../../helpers/toastHelper';
+import HoverToolTip from '../../utils/HoverToolTip/HoverToolTip';
+import HeartLoadingSmall from '../../utils/HeartLoading/HeartLoadingSmall';
+import HorizontalLoading from '../../utils/HorizontalLoading/HorizontalLoading';
 
 interface IRatingDetails {
     rating: any;
+    loading: boolean;
     onChange: (rating: number)=>void;
     defaultRating: number;
 }
 
-const RatingDetails:FC<IRatingDetails> = ({ rating, onChange, defaultRating = 0 }) => {
+const RatingDetails:FC<IRatingDetails> = ({ rating, loading, onChange, defaultRating }) => {
     const [starNumber, setStarNumber] = useState<number>(defaultRating);
-
+    // eslint-disable-next-line no-debugger
+    // debugger;
     const onClickHandler = (starCount: number): void => {
         setStarNumber(starCount);
         onChange(starCount);
@@ -20,20 +28,27 @@ const RatingDetails:FC<IRatingDetails> = ({ rating, onChange, defaultRating = 0 
 
     useEffect(() => {
         setStarNumber(defaultRating);
+        return () => {
+            setStarNumber(0);
+        };
     }, [defaultRating]);
 
     const stars = [];
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < 10; i++) {
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/control-has-associated-label,jsx-a11y/interactive-supports-focus
-        stars.push(<div
-            key={i}
-            className={cn(styles.star, {
-                [styles.starActive]: starNumber - 1 >= i,
-            })}
-            role="button"
-            onClick={() => onClickHandler(i + 1)}
-        />);
+        stars.push(
+            <HoverToolTip content={(i + 1).toString()} className={styles.starItemWrapper}>
+                {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/control-has-associated-label,jsx-a11y/interactive-supports-focus */}
+                <div
+                    key={i}
+                    className={cn(styles.star, {
+                        [styles.starActive]: starNumber - 1 >= i,
+                    })}
+                    role="button"
+                    onClick={requireAuth(() => onClickHandler(i + 1))}
+                />
+            </HoverToolTip>,
+        );
     }
 
     return (
@@ -54,7 +69,9 @@ const RatingDetails:FC<IRatingDetails> = ({ rating, onChange, defaultRating = 0 
                 </Display>
             </div>
             <div className={styles.starContainer}>
-                {stars}
+                {
+                    loading ? <HorizontalLoading count={10} /> : stars
+                }
             </div>
         </div>
     );

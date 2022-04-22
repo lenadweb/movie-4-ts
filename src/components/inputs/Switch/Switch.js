@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
-import styles from './Switch.module.css';
+import styles from 'src/components/inputs/Switch/Switch.module.css';
 
 const Switch = ({ onChange, defaultValue = false }) => {
     const [checked, setChecked] = useState(defaultValue);

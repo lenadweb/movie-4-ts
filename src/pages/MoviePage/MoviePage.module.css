@@ -87,7 +87,6 @@
 .btnWatch {
     display: flex;
     align-items: center;
-    margin-left: 32px;
 }
 
 .row {
@@ -100,11 +99,19 @@
     overflow-x: auto;
 }
 
+.btnContainer {
+    margin-left: 32px;
+    text-align: center;
+}
+
 .btnTorrents {
     text-align: center;
-    margin-top: 8px;
-    margin-left: 32px;
+    margin: 8px auto;
     cursor: pointer;
+}
+
+.activeCircleButton {
+    background-color: rgba(201, 24, 162, 0.51);
 }
 
 @media(max-width: 1250px) {

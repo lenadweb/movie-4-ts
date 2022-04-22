@@ -9,13 +9,15 @@ import useAuth from '../../hooks/useAuth';
 import RegistrationForm from '../../components/forms/AuthForms/RegistrationForm/RegistrationForm';
 import { useLoginMutation, useRegistrationMutation } from '../../api/BaseApi';
 import TextButton from '../../components/forms/Buttons/TextButton/TextButton';
+import useToast from '../../hooks/useToast';
 
 const LoginPage: FC = () => {
     const [login, { isLoading: isLoginLoading, error: loginError }] = useLoginMutation();
-    const [registration, { isLoading: isRegLoading, error: regError }] = useRegistrationMutation();
+    const [registration, { isLoading: isRegLoading, error: regError, isSuccess: isSuccessRegistration }] = useRegistrationMutation();
     const isAuth = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
+    const { success: successToast } = useToast();
 
     const onLoginHandler = async (username: string, password: string, stayInSystem: boolean): Promise<void> => {
         try {
@@ -36,6 +38,7 @@ const LoginPage: FC = () => {
                 password,
                 email,
             });
+            if (data) successToast('Вы зарегестрированы');
             if (data) navigate('/login');
         } catch (e) {
             console.log('Ошибка авторизации');

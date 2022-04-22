@@ -72,19 +72,16 @@ const Torrents:FC<ITorrents> = ({ filmId, request }) => {
         {
             Header: 'Скачать',
             accessor: 'col6' as const,
-            Cell: ({ value, row, ...rest }:any) => {
-                console.log({ value, row, ...rest });
-                return (
-                    <LoadingSpinner loaded={!(row.index === torrentIndexLoading)}>
-                        <Icon
-                            src={downloadIcon}
-                            className={styles.downloadBtn}
-                            size="xs"
-                            onClick={() => onDownloadHandler((data as any[])?.[row.index]?.id, (data as any[])?.[row.index]?.title, row.index)}
-                        />
-                    </LoadingSpinner>
-                );
-            },
+            Cell: ({ value, row, ...rest }:any) => (
+                <LoadingSpinner loaded={!(row.index === torrentIndexLoading)}>
+                    <Icon
+                        src={downloadIcon}
+                        className={styles.downloadBtn}
+                        size="xs"
+                        onClick={() => onDownloadHandler((data as any[])?.[row.index]?.id, (data as any[])?.[row.index]?.title, row.index)}
+                    />
+                </LoadingSpinner>
+            ),
         },
     ], [data, torrentIndexLoading]);
 

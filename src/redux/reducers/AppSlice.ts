@@ -24,6 +24,12 @@ const AppSlice = createSlice({
                 },
             )
             .addMatcher(
+                kpApi.endpoints.searchByFilters.matchFulfilled,
+                (state: IAppSlice, { payload }: { payload: any }) => {
+                    state.pageLoading = false;
+                },
+            )
+            .addMatcher(
                 kpApi.endpoints.getRandomMovies.matchPending,
                 (state: IAppSlice, { payload }: { payload: any }) => {
                     state.pageLoading = true;

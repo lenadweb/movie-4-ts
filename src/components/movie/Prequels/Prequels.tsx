@@ -27,7 +27,7 @@ const Prequels:FC<{movieId: string}> = ({ movieId }) => {
         <Display show={!!prequels?.length}>
             <Section style={{ marginTop: '24px' }}>
                 <Margin margin="0 0 16px 0">
-                    <H size="m">Похожие фильмы</H>
+                    <H size="m">Сиквелы и приквелы</H>
                 </Margin>
                 <HorizontalSlides items={slides} countOnPage={6} />
             </Section>

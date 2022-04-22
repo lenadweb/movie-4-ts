@@ -1,0 +1,34 @@
+.wrapper {
+    position:relative;
+    width:234px;
+    height:16px;
+    margin:auto;
+}
+
+.item {
+    position:absolute;
+    top:0;
+    background-image: url("./../../../assets/images/heartFillPink.svg");
+    background-size: contain;
+    width:16px;
+    height:16px;
+    animation-name:horizontalAnimation ;
+    animation-duration: 1s;
+    animation-iteration-count:infinite;
+    animation-direction:normal;
+    transform:scale(.3);
+    border-radius:19px;
+}
+
+
+@keyframes horizontalAnimation {
+    0%{
+        transform:scale(1);
+        /*background-color: rgb(201, 24, 162);*/
+    }
+
+    100%{
+        transform:scale(.5);
+        /*background-color: rgb(208, 44, 168);*/
+    }
+}
