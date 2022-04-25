@@ -33,7 +33,7 @@ const Diamonds:FC = () => {
     const diamondsSVG = [];
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < 500; i++) {
-        diamondsSVG.push(<Diamond delay={i * 10} />);
+        diamondsSVG.push(<Diamond key={i} delay={i * 10} />);
     }
 
     return (

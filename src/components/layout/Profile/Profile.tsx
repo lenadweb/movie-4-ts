@@ -1,6 +1,8 @@
 import React, { FC, useRef, useState } from 'react';
-import img from 'assets/images/share.svg';
-import avatarIcon from 'assets/images/profile.svg';
+import profileIcon from 'assets/images/profile.svg';
+import settingsIcon from 'assets/images/settings-icon.svg';
+import logoutIcon from 'assets/images/logout.svg';
+import avatarIcon from 'assets/images/avatar-sun.png';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styles from './Profile.module.css';
@@ -18,17 +20,17 @@ import HeartLoadingSmall from '../../utils/HeartLoading/HeartLoadingSmall';
 export const profileRoutes = [
     {
         caption: 'Профиль',
-        icon: img,
+        icon: profileIcon,
         link: '/profile',
     },
     {
         caption: 'Настройки',
-        icon: img,
+        icon: settingsIcon,
         link: '/settings',
     },
     {
         caption: 'Выйти',
-        icon: img,
+        icon: logoutIcon,
         link: '/logout',
     },
 ];

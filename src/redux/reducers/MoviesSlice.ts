@@ -55,9 +55,21 @@ const MoviesSlice = createSlice({
                 },
             )
             .addMatcher(
+                kpApi.endpoints.getPrequels.matchRejected,
+                (state: IMoviesSlice) => {
+                    state.prequels = [];
+                },
+            )
+            .addMatcher(
                 kpApi.endpoints.getSimilarMovies.matchFulfilled,
                 (state: IMoviesSlice, { payload }: { payload: any }) => {
                     state.similarFilms = payload.items;
+                },
+            )
+            .addMatcher(
+                kpApi.endpoints.getSimilarMovies.matchRejected,
+                (state: IMoviesSlice) => {
+                    state.similarFilms = [];
                 },
             )
             .addMatcher(

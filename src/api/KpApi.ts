@@ -65,8 +65,8 @@ export const kpApi = createApi({
             }),
         }),
         searchByFilters: builder.mutation({
-            query: ({ ratingFrom, ratingTo, yearFrom, yearTo, countries, genres, page }) => ({
-                url: `/v2.2/films?ratingFrom=${ratingFrom}&ratingTo=${ratingTo}&yearFrom=${yearFrom}&yearTo=${yearTo}&countries=${countries.join(',')}&genres=${genres.join(',')}&page=${page}`,
+            query: ({ ratingFrom, ratingTo, yearFrom, yearTo, genres, page }) => ({
+                url: `/v2.2/films?ratingFrom=${ratingFrom}&ratingTo=${ratingTo}&yearFrom=${yearFrom}&yearTo=${yearTo}&genres=${genres.join(',')}&page=${page}`,
                 method: 'GET',
             }),
         }),

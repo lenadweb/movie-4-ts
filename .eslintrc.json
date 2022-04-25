@@ -36,6 +36,7 @@
         "@typescript-eslint/no-use-before-define": [
             "error"
         ],
+        "react/no-array-index-key": 0,
         "react/jsx-filename-extension": [
             "warn",
             {

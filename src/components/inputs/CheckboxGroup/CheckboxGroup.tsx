@@ -11,14 +11,25 @@ export interface CheckboxValue {
 interface ICheckboxGroup {
     values: Array<CheckboxValue>;
     onChange: (values: Array<any>) => void;
+    isMultiple?: boolean;
 }
 
-const CheckboxGroup: FC<ICheckboxGroup> = ({ values, onChange }) => {
+const CheckboxGroup: FC<ICheckboxGroup> = ({ values, onChange, isMultiple = true }) => {
     const handleChange = (index: number, value: boolean): void => {
-        onChange(values.map((item, ind) => (index === ind ? {
-            ...item,
-            isEnable: value,
-        } : item)));
+        if (isMultiple) {
+            onChange(values.map((item, ind) => (index === ind ? {
+                ...item,
+                isEnable: value,
+            } : item)));
+        } else {
+            onChange(values.map((item, ind) => (index === ind ? {
+                ...item,
+                isEnable: value,
+            } : {
+                ...item,
+                isEnable: false,
+            })));
+        }
     };
 
     return (

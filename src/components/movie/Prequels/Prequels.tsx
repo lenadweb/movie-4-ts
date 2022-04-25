@@ -11,17 +11,21 @@ import MovieCompactItem from '../MovieCompactItem/MovieCompactItem';
 
 const Prequels:FC<{movieId: string}> = ({ movieId }) => {
     useGetPrequelsQuery(movieId);
+    console.log(movieId);
     const prequels = useSelector(selectPrequels);
 
-    const slides = prequels && prequels?.filter((item:any) => item?.nameRu).map((item:any, index: number) => (
-        <MovieCompactItem
-            delay={index * 30}
-            key={item.filmId}
-            id={item.filmId}
-            name={item.nameRu}
-            poster={item.posterUrlPreview}
-        />
-    ));
+    const slides = prequels && prequels
+        ?.filter((item:any) => item?.nameRu)
+        .sort((a, b) => (a.filmId > b.filmId ? 1 : -1))
+        .map((item:any, index: number) => (
+            <MovieCompactItem
+                delay={index * 30}
+                key={item.filmId}
+                id={item.filmId}
+                name={item.nameRu}
+                poster={item.posterUrlPreview}
+            />
+        ));
 
     return (
         <Display show={!!prequels?.length}>

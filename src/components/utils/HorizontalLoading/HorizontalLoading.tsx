@@ -14,6 +14,7 @@ const HorizontalLoading:FC<IHorizontalLoading> = ({ size = 16, count = 8 }) => {
 
     const items = Array.from({ length: count }).map((item, index) => (
         <div
+            key={index}
             className={styles.item}
             style={{
                 left: `${size * index + index * margin}px`,

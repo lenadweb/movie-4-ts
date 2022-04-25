@@ -12,8 +12,8 @@ interface IMovieGridItem {
     id: number;
     poster: string;
     name: string;
-    genres: Array<string>;
-    year: string;
+    genres: Array<{ genre: string }>;
+    year: number;
     ratingFilm: number;
     delay: number;
 
@@ -43,9 +43,9 @@ const MovieGridItem:FC<IMovieGridItem> = ({ id, poster, name, genres, year, rati
                 </div>
                 <div className={styles.movieInformation}>
                     <div className={styles.movieTitle}>{name}</div>
-                    <Display show={!!genres}>
+                    <Display show={!!genres?.length}>
                         <div className={styles.movieGenres}>
-                            <p>{genres?.map((item: any) => item.genre).join(', ')}</p>
+                            <p>{genres?.map(({ genre }) => genre).join(', ')}</p>
                         </div>
                     </Display>
                     <div className={styles.movieRelease}>{year}</div>
