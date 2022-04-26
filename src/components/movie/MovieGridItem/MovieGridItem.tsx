@@ -6,7 +6,9 @@ import LoadBackground from 'components/utils/LoadBackground/LoadBackground';
 import AnimatedProgressProvider from 'components/utils/AnimatedProgressProvider/AnimatedProgressProvider';
 import Rating from 'components/movie/Rating/Rating';
 import Display from 'components/utils/Display/Display';
+import Row from 'components/utils/Row/Row';
 import styles from './MovieGridItem.module.css';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 interface IMovieGridItem {
     id: number;
@@ -21,6 +23,11 @@ interface IMovieGridItem {
 
 const MovieGridItem:FC<IMovieGridItem> = ({ id, poster, name, genres, year, ratingFilm, delay }) => {
     const [animDurBorderGradient, setAnimDurBorderGradient] = useState(Math.round(Math.random() * 2800 + 2000));
+    const { width } = useWindowSize();
+    const posterSize = {
+        width: width > 768 ? '106px' : '80px',
+        height: width > 768 ? '160px' : '120px',
+    };
 
     return (
         <Link
@@ -39,16 +46,23 @@ const MovieGridItem:FC<IMovieGridItem> = ({ id, poster, name, genres, year, rati
             />
             <div className={cn(styles.movieContainer)}>
                 <div className={styles.movieImage}>
-                    <LoadBackground poster={poster} />
+                    <LoadBackground
+                        poster={poster}
+                        width={posterSize.width}
+                        height={posterSize.height}
+                    />
                 </div>
                 <div className={styles.movieInformation}>
-                    <div className={styles.movieTitle}>{name}</div>
+                    <Row>
+                        <div className={styles.movieTitle}>{name}</div>
+                        <div className={styles.movieRelease}>{year}</div>
+                    </Row>
+
                     <Display show={!!genres?.length}>
                         <div className={styles.movieGenres}>
                             <p>{genres?.map(({ genre }) => genre).join(', ')}</p>
                         </div>
                     </Display>
-                    <div className={styles.movieRelease}>{year}</div>
                     <Display show={!!ratingFilm}>
                         <div className={styles.movieRating}>
                             <AnimatedProgressProvider

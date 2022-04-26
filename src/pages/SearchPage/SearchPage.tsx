@@ -42,16 +42,21 @@ const SearchPage:FC = () => {
     }, [genres, years, rating]);
 
     const onScrollEnd = async (nPage: number): Promise<void> => {
-        await searchByFilters({
-            ratingFrom: rating[0],
-            ratingTo: rating[1],
-            yearFrom: years[0],
-            yearTo: years[1],
-            genres: genres.filter(({ isEnable }) => isEnable).map(({ value }) => value),
-            page: nPage,
-        });
         setPage(nPage);
     };
+
+    useEffect(() => {
+        if (page !== 1) {
+            searchByFilters({
+                ratingFrom: rating[0],
+                ratingTo: rating[1],
+                yearFrom: years[0],
+                yearTo: years[1],
+                genres: genres.filter(({ isEnable }) => isEnable).map(({ value }) => value),
+                page,
+            });
+        }
+    }, [page]);
 
     return (
         <div className={styles.wrapper}>

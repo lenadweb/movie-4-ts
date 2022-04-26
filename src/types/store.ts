@@ -4,6 +4,7 @@ import { IMainMovieInfo, IMovieInformation, IMovieListItem, IStaffItem, ITorrent
 
 export interface IAppSlice {
     pageLoading: boolean;
+    sidebarVisible: boolean;
 }
 
 export interface IUserState {

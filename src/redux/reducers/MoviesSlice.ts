@@ -27,6 +27,9 @@ const MoviesSlice = createSlice({
         setListFilms(state, action) {
             state.listFilms = action.payload;
         },
+        setCountPage(state, action) {
+            state.countPage = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -90,6 +93,7 @@ const MoviesSlice = createSlice({
 
 export const {
     setListFilms,
+    setCountPage,
 } = MoviesSlice.actions;
 export default MoviesSlice.reducer;
 export const selectListFilms = (state: IStore): IMovieListItem[] => state.movies.listFilms;

@@ -31,3 +31,13 @@
     border-radius: 10px;
     box-shadow: var(--box-shadow-primary);
 }
+
+@media(max-width:768px) {
+    .username {
+        display: none;
+    }
+
+    .avatarWrapper {
+        padding: 8px;
+    }
+}

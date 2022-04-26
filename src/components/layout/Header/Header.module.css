@@ -1,10 +1,40 @@
 .wrapper {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .profile {
     margin-left: auto;
     margin-right: 31px;
     z-index: 100;
+}
+
+.mobileMenuBtn {
+    display: none;
+    padding: 10px;
+    border-radius: 14px;
+    background-color: var(--blue-background);
+    cursor: pointer;
+    transition: all 0.1s ease-in;
+}
+
+.mobileMenuBtn:hover {
+    /*background-color: var(--blue-background-hover);*/
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: auto minmax(200px, 300px) auto;
+        grid-gap: 24px;
+    }
+
+    .mobileMenuBtn {
+        display: block;
+    }
+
+    .profile {
+        margin: 0;
+    }
 }

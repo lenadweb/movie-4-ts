@@ -1,8 +1,9 @@
 .wrapper {
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 1fr;
     grid-auto-rows: 1fr;
     grid-gap: 16px;
+    min-height: 100%;
 }
 
 .inputItem {
@@ -34,7 +35,7 @@
 
 .resultGrid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 16px;
     padding-right: 20px;
     height: 100%;
@@ -43,10 +44,9 @@
 @media(max-width:768px) {
     .wrapper {
         grid-template-columns: 1fr;
-        grid-auto-rows: auto;
     }
 
-    .result {
-        max-height: initial;
+    .resultGrid {
+        grid-template-columns: 1fr;
     }
 }

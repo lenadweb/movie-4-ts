@@ -1,6 +1,7 @@
 import React from 'react';
 import { IRoute } from 'types/routes';
 import WishMovies from 'pages/WishMovies/WishMovies';
+import SearchResultPage from 'pages/SearchPage/SearchResultPage/SearchResultPage';
 import Layout from '../components/layout/Layout/Layout';
 import RandomMovies from '../pages/RandomMovies/RandomMovies';
 import MoviePage from '../pages/MoviePage/MoviePage';
@@ -65,11 +66,15 @@ export const appRoutes: Array<IRoute> = [
             {
                 path: '/search/',
                 requireAuth: false,
-                element: <SearchPage />,
                 name: 'Поиск',
                 children: [
                     {
                         path: ':q',
+                        element: <SearchResultPage />,
+                        name: '',
+                    },
+                    {
+                        path: '',
                         element: <SearchPage />,
                         name: '',
                     },

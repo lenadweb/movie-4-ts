@@ -7,6 +7,7 @@ import BlurFade from 'components/utils/BlurFade/BlurFade';
 import useWindowSize from 'hooks/useWindowSize';
 import Display from 'components/utils/Display/Display';
 import { useGetMoviesMutation } from 'api/KpApi';
+import { useNavigate } from 'react-router-dom';
 import styles from './QuickSearch.module.css';
 import { useOutsideClick } from '../../../hooks/useOutsideClick';
 
@@ -18,6 +19,7 @@ const QuickSearch:FC = () => {
     const [inputValue, setInputValue] = useState('');
     const [visibleResult, setVisibleResult] = useState(false);
     const ref = useRef(null);
+    const navigate = useNavigate();
     const [getMovies, { isLoading, data: searchResult }] = useGetMoviesMutation();
     useOutsideClick(ref, () => setVisibleResult(false));
     const timer = useRef<any>();
@@ -32,9 +34,9 @@ const QuickSearch:FC = () => {
 
     const onEnterHandler: KeyboardEventHandler<HTMLInputElement> = (e) => {
         if (e.key === 'Enter') {
-            // history.push(`/search/${inputValue}`);
             setInputValue('');
             setVisibleResult(false);
+            navigate(`/search/${inputValue}`);
         }
     };
 

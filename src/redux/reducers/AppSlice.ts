@@ -5,6 +5,7 @@ import { kpApi } from '../../api/KpApi';
 
 const initialState:IAppSlice = {
     pageLoading: true,
+    sidebarVisible: false,
 };
 
 const AppSlice = createSlice({
@@ -13,6 +14,9 @@ const AppSlice = createSlice({
     reducers: {
         setPageLoading(state, action) {
             state.pageLoading = action.payload;
+        },
+        setSidebarVisible(state, action) {
+            state.sidebarVisible = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -40,6 +44,8 @@ const AppSlice = createSlice({
 
 export const {
     setPageLoading,
+    setSidebarVisible,
 } = AppSlice.actions;
 export default AppSlice.reducer;
 export const selectPageLoading = (state: IStore): boolean => state.app.pageLoading;
+export const selectSidebarVisible = (state: IStore): boolean => state.app.sidebarVisible;

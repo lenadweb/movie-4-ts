@@ -41,7 +41,11 @@ const LoadBackground:FC<ILoadBackground> = ({ poster, height = '160px', width = 
                 className={cn(styles.loadImage, styles.holder, {
                     [styles.loaded]: loadImg,
                 })}
-                style={{ backgroundImage: `url(${poster})` }}
+                style={{
+                    backgroundImage: `url(${poster})`,
+                    minWidth: width,
+                    minHeight: height,
+                }}
             />
         </div>
 

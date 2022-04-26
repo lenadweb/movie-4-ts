@@ -46,40 +46,63 @@
 
 @media(max-width: 768px) {
     .sidebarContainer {
-        padding-bottom: env(safe-area-inset-bottom);
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-        z-index: 200;
-        height: auto;
-        background-color: #15001d;
-        border-radius: var(--secondary-border-radius)
-    }
-
-    .sidebar {
-        padding: 4px;
-        border-radius: 0;
-        border: none;
-        background: transparent;
+        transform: translate(-100%);
+        opacity: 0;
+        width: 0;
+        height: 100%;
+        transition: all 0.2s ease-in-out;
     }
 
     .sidebarContainer:before {
-        display: none;
+        border-radius: 0 14px 14px 0;
     }
 
-    .linkLogo {
-        display: none;
+    .sidebarContainerVisible {
+        transform: translate(0);
+        opacity: 1;
+        position: static;
+        width: auto;
     }
 
-    .navigation {
-        display: flex;
-        margin-top: 0;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        overflow-y: auto;
+    .sidebar {
+        border-radius: 0 14px 14px 0;
     }
+
+    /*.sidebarContainer {*/
+    /*    padding-bottom: env(safe-area-inset-bottom);*/
+    /*    position: fixed;*/
+    /*    width: 100%;*/
+    /*    bottom: 0;*/
+    /*    left: 0;*/
+    /*    z-index: 200;*/
+    /*    height: auto;*/
+    /*    background-color: #15001d;*/
+    /*    border-radius: var(--secondary-border-radius)*/
+    /*}*/
+
+    /*.sidebar {*/
+    /*    padding: 4px;*/
+    /*    border-radius: 0;*/
+    /*    border: none;*/
+    /*    background: transparent;*/
+    /*}*/
+
+    /*.sidebarContainer:before {*/
+    /*    display: none;*/
+    /*}*/
+
+    /*.linkLogo {*/
+    /*    display: none;*/
+    /*}*/
+
+    /*.navigation {*/
+    /*    display: flex;*/
+    /*    margin-top: 0;*/
+    /*    justify-content: center;*/
+    /*    align-items: center;*/
+    /*    width: 100%;*/
+    /*    overflow-y: auto;*/
+    /*}*/
 
     .switchTheme {
         display: none;

@@ -66,9 +66,10 @@
 }
 
 .movieRelease {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    /*position: absolute;*/
+    /*top: 10px;*/
+    /*right: 10px;*/
+    margin-top: 2px;
     font-size: 0.7rem;
     font-weight: bold;
 }
@@ -76,7 +77,7 @@
 .movieTitle {
     font-size: 1.2rem;
     font-weight: bold;
-    padding-right: 45px;
+    margin-right: 24px;
 }
 
 .movieGenres {
@@ -134,5 +135,11 @@
     }
     100% {
         opacity: 1;
+    }
+}
+
+@media(max-width: 768px) {
+    .movieItem {
+        min-height: initial;
     }
 }
